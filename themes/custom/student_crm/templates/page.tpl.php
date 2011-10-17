@@ -41,14 +41,16 @@
 				<?php print render($page['sidebar_left']); ?>
 			</div>
 		<?php endif; ?>
-		<?php if($page['sidebar_right']): ?>
-				<div id="sidebar-left" class="sidebar right narrow">
+		
+		<div id="content-wrapper" class="content-container">
+			
+			<?php if($page['sidebar_right']): ?>
+				<div id="sidebar-right" class="sidebar right narrow">
 					<?php print render($page['sidebar_right']); ?>
 				</div>
 			<?php endif; ?>
-		<div id="content-wrapper" class="content-container">
 			<div class="fluid" id="content">
-				<?php if(!$is_front && $title): ?>
+			<?php if(!$is_front && $title): ?>
 					<h2 id="page-title"><?php print $title; ?></h2>
 				<?php endif; ?>
 				<?php if($page['content_top_wide']): ?>
