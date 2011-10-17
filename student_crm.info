@@ -41,8 +41,8 @@ dependencies[] = user
 ;contrib
 dependencies[] = ctools
 dependencies[] = features
+dependencies[] = guiders_js
 dependencies[] = views
-dependencies[] = Guiders-JS
 
 ;crm
 dependencies[] = crm
