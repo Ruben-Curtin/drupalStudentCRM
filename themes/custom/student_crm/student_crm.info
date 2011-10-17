@@ -1,0 +1,25 @@
+name=Student CRM
+description=Base theme for the student crm project
+version=beta1
+core=7.x
+
+
+stylesheets[all][] = css/style.css
+
+scripts[] = js/placeholder.js
+
+regions[header_left]		= Header Left
+regions[header_middle]		= Header Middle
+regions[header_right]		= Header Right
+
+regions[help]				= Help
+
+regions[sidebar_left]		= Sidebar Left
+regions[sidebar_right]		= Sidebar Right
+
+regions[content_top_wide]	= Content Top Wide
+regions[content_top_left] 	= Content Top Left
+regions[content_top_right]  = Content Top Right
+regions[content] 			= Content
+regions[content_bottom] 	= Content Bottom
+

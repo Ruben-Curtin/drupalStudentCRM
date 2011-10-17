@@ -13,6 +13,9 @@ api = 2
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.0-rc1"
 
+projects[features][subdir] = "contrib"
+projects[features][version] = "1.0-beta4"
+
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
 

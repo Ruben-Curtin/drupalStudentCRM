@@ -1,0 +1,264 @@
+/** COLORS **/
+/** LAYOUT **/
+/** RESET **/
+html {
+  font-size: 100%;
+}
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+table,
+th,
+td,
+img,
+form,
+label,
+iframe,
+fieldset,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+  border: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+input,
+select,
+textarea,
+button {
+  font-size: 1em;
+  line-height: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+input[type=button], input[type=submit], button {
+  overflow: visible;
+}
+input[disabled],
+select[disabled],
+textarea[disabled],
+button[disabled] {
+  opacity: 0.75;
+}
+.clear {
+  height: 0;
+  clear: both;
+}
+.hidden {
+  display: none;
+}
+/** SKIP LINK **/
+#skip-link {
+  background: #fffba4;
+  font-weight: bold;
+}
+/* Basic elements and type */
+body {
+  color: #000000;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 0.875em;
+  line-height: 1.4;
+}
+p {
+  margin-bottom: 1em;
+}
+blockquote {
+  margin: 1em;
+}
+a {
+  color: #0084b4;
+}
+li {
+  margin-bottom: 0.5em;
+}
+ul, ol {
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+}
+.inline {
+  list-style-type: none;
+  display: inline;
+  margin: 0;
+}
+.inline li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  margin-bottom: .5em;
+}
+h1 {
+  font-size: 2.5em;
+}
+h2 {
+  font-size: 1.7em;
+}
+h3 {
+  font-size: 1.4em;
+}
+h4 {
+  font-size: 1.3em;
+}
+h5 {
+  font-size: 1.2em;
+}
+h6 {
+  font-size: 1.1em;
+}
+/** LAYOUT **/
+body {
+  width: 100%;
+  background: #f4f1ec;
+}
+.container {
+  position: relative;
+  max-width: 1200px;
+  min-width: 800px;
+  margin: 0 auto;
+}
+.content-container {
+  position: relative;
+}
+.content-container .content-area {
+  margin: 10px 0 15px 0;
+}
+.narrow {
+  width: 200px;
+}
+.left {
+  float: left;
+}
+.sidebar.left {
+  padding: 0 0 0 10px;
+}
+.right {
+  float: right;
+  padding: 0 10px;
+}
+/** HEADER **/
+#header {
+  background-color: #6aa4c2;
+  background-image: -moz-linear-gradient(top, #6aa4c2, #488db1);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6aa4c2), color-stop(1, #488db1));
+  background-image: -webkit-linear-gradient(#6aa4c2, #488db1);
+  background-image: linear-gradient(top, #6aa4c2, #488db1);
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+#header h1 {
+  float: left;
+  color: #fff;
+  font-size: 1.4em;
+  margin: 0;
+  font-weight: bold;
+}
+#header h1 a {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  -webkit-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  -moz-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+/** PAGE **/
+#page {
+  padding: 15px 10px;
+}
+#page .fluid {
+  margin-left: 210px;
+}
+#page.has-right-sidebar .fluid {
+  margin-right: 220px;
+}
+#content {
+  background: #ffffff;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  padding: 10px;
+}
+#content .profile {
+  clear: none;
+}
+/** BUTTONS **/
+a .add {
+  background: url(../images/add.png) no-repeat 0 0;
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  margin-right: 5px;
+}
+a.add {
+  margin: 10px 0;
+}
+/** MESSAGES **/
+#messages .messages {
+  border: none;
+  background-image: none;
+  margin: 0;
+}
+#messages .messages .container {
+  font-size: 16px;
+  position: relative;
+  padding-left: 32px;
+}
+#messages .messages .message-icon {
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  left: 0px;
+  background: #666666 url(../images/message-sprites.png) no-repeat 2px 4px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+#messages .messages.notice .message-icon {
+  background-position: 2px -17px;
+}
+#messages .messages.notice {
+  background: #fae772;
+}
+#messages .messages.error .message-icon {
+  background-position: 2px -42px;
+}
+/** TABS **/
+ul.tabs {
+  margin: 0px -10px;
+}
+ul.tabs li a, ul.tabs li a.active {
+  border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+}
+ul.primary li a, ul.primary li a:hover {
+  background: #ffffff;
+}
