@@ -31,7 +31,7 @@ projects[crm][subdir] = "contrib"
 projects[crm][version] = "1.x-dev"
 projects[crm][download][type] = "git"
 projects[crm][download][url] = "http://git.drupal.org/sandbox/citizenkane/1260982.git"
-projects[crm][download][branch] = "7.x-1.x"
+projects[crm][download][branch] = "master"
 
 ; Formalize module
 projects[formalize][type] = module
@@ -39,7 +39,7 @@ projects[formalize][subdir] = "contrib"
 projects[formalize][version] = "1.x-dev"
 projects[formalize][download][type] = "git"
 projects[formalize][download][url] = "http://git.drupal.org/project/formalize.git"
-projects[formalize][download][branch] = "master"
+projects[formalize][download][branch] = "7.x-1.x"
 
 ; Libraries
 
