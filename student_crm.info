@@ -40,6 +40,7 @@ dependencies[] = user
 
 ;contrib
 dependencies[] = ctools
+dependencies[] = entity
 dependencies[] = features
 dependencies[] = guiders_js
 dependencies[] = views
