@@ -24,6 +24,15 @@ projects[views][version] = "3.0-rc1"
 
 ; Modules in development
 
+; Trellon CRM
+
+projects[crm][type] = module
+projects[crm][subdir] = "contrib"
+projects[crm][version] = "1.x-dev"
+projects[crm][download][type] = "git"
+projects[crm][download][url] = "http://git.drupal.org/sandbox/citizenkane/1260982.git"
+projects[crm][download][branch] = "7.x-1.x"
+
 ; Formalize module
 projects[formalize][type] = module
 projects[formalize][subdir] = "contrib"

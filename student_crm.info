@@ -37,3 +37,14 @@ dependencies[] = toolbar
 dependencies[] = trigger
 dependencies[] = update
 dependencies[] = user
+
+;contrib
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = views
+dependencies[] = Guiders-JS
+
+;crm
+dependencies[] = crm
+dependencies[] = crm_activity
+
