@@ -13,5 +13,33 @@ api = 2
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.0-rc1"
 
+projects[Guiders-JS][subdir] = "contrib"
+projects[Guiders-JS][version] = "1.0"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.0-rc1"
+
+; Modules in development
+
+; Formalize module
+projects[formalize][type] = module
+projects[formalize][subdir] = "contrib"
+projects[formalize][version] = "1.x-dev"
+projects[formalize][download][type] = "git"
+projects[formalize][download][url] = "http://git.drupal.org/project/formalize.git"
+projects[formalize][download][branch] = "7.x-1.x"
+
+; Libraries
+
+; Download the Formalize library
+libraries[guiders][download][type] = "get"
+libraries[guiders][download][url] = "https://github.com/nathansmith/formalize/tarball/master"
+libraries[guiders][directory_name] = "formalize"
+libraries[guiders][destination] = "libraries"
+
+
+; Download the guidersJS library
+libraries[guiders][download][type] = "get"
+libraries[guiders][download][url] = "https://github.com/jeff-optimizely/Guiders-JS/tarball/master"
+libraries[guiders][directory_name] = "guiders"
+libraries[guiders][destination] = "libraries"
