@@ -254,11 +254,22 @@ a.add {
 ul.tabs {
   margin: 0px -10px;
 }
+ul.tabs {
+  border-color: #dddddd;
+}
 ul.tabs li a, ul.tabs li a.active {
+  color: #000000;
   border-radius: 3px 3px 0px 0px;
   -moz-border-radius: 3px 3px 0px 0px;
   -webkit-border-radius: 3px 3px 0px 0px;
-}
-ul.primary li a, ul.primary li a:hover {
+  border-left-color: #dddddd;
+  border-right-color: #dddddd;
+  border-top-color: #dddddd;
   background: #ffffff;
+}
+ul.tabs li a.active:hover {
+  border-bottom-color: #ffffff;
+}
+ul.primary li a:hover {
+  background: #f4f1ec;
 }

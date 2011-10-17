@@ -53,6 +53,8 @@
 
 @main-background	: #f4f1ec;
 
+@content-line-color : #ddd;
+
 /** LAYOUT **/
 @min-width			: 800px;
 @max-width			: 1200px;
@@ -129,5 +131,8 @@ a.add { margin: 10px 0; }
 
 /** TABS **/
 ul.tabs { margin: 0px -10px; }
-	ul.tabs li a, ul.tabs li a.active { .border-radius(3px, 3px, 0px, 0px); }
-	ul.primary li a, ul.primary li a:hover { background: @content-background; }
+	ul.tabs { border-color: @content-line-color; }
+	ul.tabs li a, ul.tabs li a.active { color: @text-color; .border-radius(3px, 3px, 0px, 0px); border-left-color: @content-line-color; border-right-color: @content-line-color; border-top-color: @content-line-color; background: @content-background;}
+	ul.tabs li a.active:hover { border-bottom-color: @content-background; }
+	
+		ul.primary li a:hover { background: @body-background; }
