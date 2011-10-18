@@ -41,6 +41,8 @@ dependencies[] = user
 ;contrib
 dependencies[] = addressfield
 dependencies[] = cck_phone
+dependencies[] = context_ui
+dependencies[] = context
 dependencies[] = ctools
 dependencies[] = email
 dependencies[] = feeds
@@ -50,6 +52,7 @@ dependencies[] = entity
 dependencies[] = features
 dependencies[] = field_group
 dependencies[] = guiders_js
+dependencies[] = job_scheduler
 dependencies[] = libraries
 dependencies[] = link
 dependencies[] = relation

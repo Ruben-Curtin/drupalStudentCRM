@@ -16,6 +16,9 @@ projects[addressfield][version] = "1.0-beta2"
 projects[cck_phone][subdir] = "contrib"
 projects[cck_phone][version] = "1.x-dev"
 
+projects[context][subdir] = "contrib"
+projects[context][version] = "3.0-beta2"
+
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.0-rc1"
 
@@ -36,6 +39,9 @@ projects[field_group][version] = "1.0"
 
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
+
+projects[job_scheduler][subdir] = "contrib"
+projects[job_scheduler][version] = "2.0-alpha2"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "1.0"
