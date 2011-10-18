@@ -15,14 +15,14 @@
 			<?php endif; ?>
 		</div>
 		<div class="content-container">
-			<?php if($page['header_left']): ?>
+			<?php if($page['header_middle']): ?>
 				<div class="fluid">
-					<?php print render($page['header_left']); ?>
+					<?php print render($page['header_middle']); ?>
 				</div>
 			<?php endif; ?>
 			<?php if($page['header_right']): ?>
 				<div class="narrow sidebar right">
-					<?php print render($page['header_left']); ?>
+					<?php print render($page['header_right']); ?>
 				</div>
 			<?php endif; ?>
 		</div>

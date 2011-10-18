@@ -1,0 +1,18 @@
+<?php
+/**
+ * @file
+ * Code for the Student CRM Contacts feature.
+ */
+
+include_once('student_crm_contacts.features.inc');
+
+/**
+*	Implementation of hook_form_FORM_ID_alter
+*	Here we're changing how the search box works
+*/
+function student_crm_contacts_form_views_exposed_form_alter(&$form, $form_state) {
+	$form['submit']['#attributes']['class'][] = 'element-invisible';
+	$form['contact_name_value']['#attributes']['class'][] = 'search-box';
+	$form['contact_name_value']['#attributes']['placeholder'] = t('Search');
+	$form['#info']['filter-contact_name_value']['label'] = '<span class="element-invisible">' . $form['#info']['filter-contact_name_value']['label'] .'</span>';
+}

@@ -121,12 +121,15 @@ body { width: 100%; background: @body-background; }
 
 /** FORMS **/
 fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; margin: 10px 0; }
+input.search-box { border: #fff 1px solid; .round-box(5px); font-size: 1.2em; width: (@min-width / 2); }
 
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; .box-shadow (0, 2px, 5px, 0.4 ); }
 	#header h1 { float: left; color: #fff; font-size: 1.4em; margin: 0; font-weight: bold;}
 		#header h1 a { color: #fff; text-decoration: none; .text-shadow(1px, 1px, 2px, rgba(0,0,0,0.6)); }
-
+	#header .right { width: (@min-width / 2); }
+	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
+	
 /** PAGE **/
 #page { padding: 15px 10px; }
 	#content-wrapper { margin-left: (@min-width / 4) + @sidebar-padding; }
@@ -134,7 +137,7 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 #content-wrapper { background: @content-background; .round-box(8px); padding: @content-padding; .box-shadow(0px, 0px, 4px, 0.2); }
 	#page.has-right-sidebar #content-wrapper { padding-right: 0; background: @content-background url(../images/sidebar.png) repeat-y right 0; }
 	#content .profile { clear: none; }
-	#content-wrapper .sidebar.right { background: lighten(@header-gradient, 30%); }
+	#content-wrapper .sidebar.right { background: lighten(@header-gradient, 30%); padding: 0; }
 
 /** BUTTONS **/
 a .add { background: url(../images/add.png) no-repeat 0 0; width: 9px; height: 9px; display: inline-block; margin-right: 5px; }
@@ -155,3 +158,12 @@ ul.tabs { margin: 0px -10px 15px -10px; }
 	ul.tabs li a.active:hover { border-bottom-color: @content-background; }
 	
 		ul.primary li a:hover { background: @body-background; }
+
+/** PAGER **/
+ul.pager { margin: 15px 0; }
+	ul.pager li { padding: 0; margin: .25em 0; }
+	ul.pager a { background: #f3f3f3; .round-box(4px); font-weight: bold; text-decoration: none; padding: 0.5em; }
+	ul.pager li.pager-current { background: #e15440; color: #fff; .round-box(4px);}
+		ul.pager li.pager-current, ul.pager a { .box-shadow (1px, 1px, 1px, 0.2 ); }
+	ul.pager a:hover { background: @header-gradient; color: #fff; }
+	ul.pager .pager-next a, ul.pager .pager-last a { width: 70px; }

@@ -203,6 +203,14 @@ fieldset {
   padding: 10px;
   margin: 10px 0;
 }
+input.search-box {
+  border: #fff 1px solid;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  font-size: 1.2em;
+  width: 400px;
+}
 /** HEADER **/
 #header {
   background-color: #6aa4c2;
@@ -228,6 +236,13 @@ fieldset {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
   -webkit-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
   -moz-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+#header .right {
+  width: 400px;
+}
+#header .right .views-exposed-widgets, #header .right .views-exposed-widget {
+  margin: 0;
+  padding: 0;
 }
 /** PAGE **/
 #page {
@@ -258,6 +273,7 @@ fieldset {
 }
 #content-wrapper .sidebar.right {
   background: #d7e6ee;
+  padding: 0;
 }
 /** BUTTONS **/
 a .add {
@@ -322,4 +338,40 @@ ul.tabs li a.active:hover {
 }
 ul.primary li a:hover {
   background: #f4f1ec;
+}
+/** PAGER **/
+ul.pager {
+  margin: 15px 0;
+}
+ul.pager li {
+  padding: 0;
+  margin: .25em 0;
+}
+ul.pager a {
+  background: #f3f3f3;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0.5em;
+}
+ul.pager li.pager-current {
+  background: #e15440;
+  color: #fff;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.pager li.pager-current, ul.pager a {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+ul.pager a:hover {
+  background: #6aa4c2;
+  color: #fff;
+}
+ul.pager .pager-next a, ul.pager .pager-last a {
+  width: 70px;
 }
