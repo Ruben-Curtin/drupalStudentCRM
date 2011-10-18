@@ -94,6 +94,21 @@ h4 { font-size:1.3em; }
 h5 { font-size:1.2em; }
 h6 { font-size:1.1em; }
 
+/** TABLES **/
+table {
+  border: 1px solid #ededed;
+}
+
+table thead th { background: lighten(@header-gradient, 25%); color: darken(@content-background, 80%); margin-bottom: 10px; padding: 3px 10px; font-weight: bold; .text-shadow(0px, 1px, 0px, #fff); white-space: nowrap; }
+	table th, table td {padding: 6px 8px; }
+		table th a { text-shadow: none; }
+	table td { border-top: 1px dotted darken(@content-background, 50%); }
+		table tr.odd { background: darken(@content-background, 5%); }
+		table tr.even { background: @content-background; }
+	table span.indent { padding: 0 2px 0 10px; }
+	table td.indent { padding-left: 25px; }
+
+
 /** LAYOUT **/
 body { width: 100%; background: @body-background; }
 .container { position: relative; max-width: @max-width; min-width: @min-width; margin: 0 auto; }

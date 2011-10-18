@@ -133,6 +133,42 @@ h5 {
 h6 {
   font-size: 1.1em;
 }
+/** TABLES **/
+table {
+  border: 1px solid #ededed;
+}
+table thead th {
+  background: #c4dbe7;
+  color: #333333;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  font-weight: bold;
+  text-shadow: 0px 1px 0px #ffffff;
+  -webkit-text-shadow: 0px 1px 0px #ffffff;
+  -moz-text-shadow: 0px 1px 0px #ffffff;
+  white-space: nowrap;
+}
+table th, table td {
+  padding: 6px 8px;
+}
+table th a {
+  text-shadow: none;
+}
+table td {
+  border-top: 1px dotted #808080;
+}
+table tr.odd {
+  background: #f2f2f2;
+}
+table tr.even {
+  background: #ffffff;
+}
+table span.indent {
+  padding: 0 2px 0 10px;
+}
+table td.indent {
+  padding-left: 25px;
+}
 /** LAYOUT **/
 body {
   width: 100%;
