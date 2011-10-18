@@ -197,6 +197,12 @@ body {
   float: right;
   padding: 0 10px;
 }
+/** FORMS **/
+fieldset {
+  border: 1px solid #b3b3b3;
+  padding: 10px;
+  margin: 10px 0;
+}
 /** HEADER **/
 #header {
   background-color: #6aa4c2;
@@ -296,7 +302,7 @@ a.add {
 }
 /** TABS **/
 ul.tabs {
-  margin: 0px -10px;
+  margin: 0px -10px 15px -10px;
 }
 ul.tabs {
   border-color: #dddddd;

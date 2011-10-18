@@ -119,6 +119,9 @@ body { width: 100%; background: @body-background; }
 		.sidebar.left { padding: 0 0 0 @sidebar-padding; }
 	.right { float: right; padding: 0 @sidebar-padding; }
 
+/** FORMS **/
+fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; margin: 10px 0; }
+
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; .box-shadow (0, 2px, 5px, 0.4 ); }
 	#header h1 { float: left; color: #fff; font-size: 1.4em; margin: 0; font-weight: bold;}
@@ -146,7 +149,7 @@ a.add { margin: 10px 0; }
 	#messages .messages.error .message-icon { background-position: 2px -42px; }	
 
 /** TABS **/
-ul.tabs { margin: 0px -10px; }
+ul.tabs { margin: 0px -10px 15px -10px; }
 	ul.tabs { border-color: @content-line-color; }
 	ul.tabs li a, ul.tabs li a.active { color: @text-color; .border-radius(3px, 3px, 0px, 0px); border-left-color: @content-line-color; border-right-color: @content-line-color; border-top-color: @content-line-color; background: @content-background;}
 	ul.tabs li a.active:hover { border-bottom-color: @content-background; }

@@ -53,14 +53,19 @@
 			<?php if(!$is_front && $title): ?>
 					<h2 id="page-title"><?php print $title; ?></h2>
 				<?php endif; ?>
+				<?php if ($tabs = render($tabs)): ?>
+		       		<div class="tabs"><?php print $tabs; ?></div>
+		      	<?php endif; ?>
+				<?php if($page['help']): ?>
+					<div id="help">
+						<?php print render($page['help']); ?>
+					</div>
+				<?php endif; ?>
 				<?php if($page['content_top_wide']): ?>
 					<div id="content-top" class="content-area">
 						<?php print render($page['content_top_wide']); ?>
 					</div>
 				<?php endif; ?>
-				<?php if ($tabs = render($tabs)): ?>
-		       		<div class="tabs"><?php print $tabs; ?></div>
-		      	<?php endif; ?>
 				<?php if($page['content_top_left'] || $page['content_top_right']): ?>
 					<div id="content-top-regions" class="content-area">
 						<div class="column">
