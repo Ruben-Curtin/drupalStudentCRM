@@ -49,10 +49,14 @@ projects[libraries][version] = "1.0"
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0-beta1"
 
+projects[options_element][subdir] = "contrib"
+projects[options_element][version] = "1.4"
+
 projects[relation][subdir] = "contrib"
 projects[relation][version] = "1.0-beta1"
 
-
+projects[webform][subdir] = "contrib"
+projects[webform][version] = "3.13"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.0-rc1"

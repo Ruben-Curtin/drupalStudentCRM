@@ -28,7 +28,6 @@ dependencies[] = number
 dependencies[] = options
 dependencies[] = path
 dependencies[] = rdf
-dependencies[] = search
 dependencies[] = shortcut
 dependencies[] = system
 dependencies[] = taxonomy
@@ -55,8 +54,10 @@ dependencies[] = guiders_js
 dependencies[] = job_scheduler
 dependencies[] = libraries
 dependencies[] = link
+dependencies[] = options_element
 dependencies[] = relation
 dependencies[] = views
+dependencies[] = webform
 
 ;crm
 dependencies[] = crm
