@@ -10,8 +10,17 @@ api = 2
 ;libraries[profiler][download][url] = "http://ftp.drupal.org/files/projects/profiler-7.x-2.x-dev.tar.gz"
 ;libraries[profiler][destination] = "libraries/profiler"
 
+projects[addressfield][subdir] = "contrib"
+projects[addressfield][version] = "1.0-beta2"
+
+projects[cck_phone][subdir] = "contrib"
+projects[cck_phone][version] = "1.x-dev"
+
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.0-rc1"
+
+projects[email][subdir] = "contrib"
+projects[email][version] = "1.0"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-beta10"
@@ -19,8 +28,22 @@ projects[entity][version] = "1.0-beta10"
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.0-beta4"
 
+projects[field_group][subdir] = "contrib"
+projects[field_group][version] = "1.0"
+
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
+
+projects[libraries][subdir] = "contrib"
+projects[libraries][version] = "1.0"
+
+projects[link][subdir] = "contrib"
+projects[link][version] = "1.0-beta1"
+
+projects[relation][subdir] = "contrib"
+projects[relation][version] = "1.0-beta1"
+
+
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.0-rc1"

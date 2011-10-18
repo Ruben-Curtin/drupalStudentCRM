@@ -39,10 +39,17 @@ dependencies[] = update
 dependencies[] = user
 
 ;contrib
+dependencies[] = addressfield
+dependencies[] = cck_phone
 dependencies[] = ctools
+dependencies[] = email
 dependencies[] = entity
 dependencies[] = features
+dependencies[] = field_group
 dependencies[] = guiders_js
+dependencies[] = libraries
+dependencies[] = link
+dependencies[] = relation
 dependencies[] = views
 
 ;crm
