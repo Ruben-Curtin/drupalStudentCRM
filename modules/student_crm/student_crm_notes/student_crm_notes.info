@@ -1,0 +1,6 @@
+name=Student CRM Notes
+description=Allows making notes of different types about contacts
+package=Student CRM
+core=7.x
+
+dependencies[] = entity

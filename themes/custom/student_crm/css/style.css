@@ -245,8 +245,11 @@ input.search-box {
   padding: 0;
 }
 /** PAGE **/
-#page {
+#page .container {
   padding: 15px 10px;
+}
+#page .left {
+  padding-left: 15px;
 }
 #content-wrapper {
   margin-left: 210px;
