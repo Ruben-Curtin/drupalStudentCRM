@@ -1,0 +1,4 @@
+name=Student CRM Cases
+description=Case management for the Student CRM
+package=Student CRM
+core=7.x
