@@ -57,6 +57,7 @@ dependencies[] = link
 dependencies[] = options_element
 dependencies[] = relation
 dependencies[] = views
+dependencies[] = views_bulk_operations
 dependencies[] = webform
 
 ;crm
