@@ -32,18 +32,18 @@ function student_crm_blocks_form_block_admin_configure_alter_submit($form, $form
 
 function student_crm_blocks_block_info_alter(&$blocks, $theme, $code_blocks) {
 	$settings = variable_get('student_crm_blocks', array());
-	foreach($settings as $module => $deltas) {
+	/*foreach($settings as $module => $deltas) {
 		foreach($deltas as $delta => $ajax) {
-			if($ajax) {
+			if($ajax && $blocks[$module][$delta]['module'] != 'student_crm_blocks') {
 				$blocks[$module][$delta]['module'] = 'student_crm_blocks';
-				$blocks[$module][$delta]['delta']  = $module .'\\'. $delta;
+				$blocks[$module][$delta]['delta']  = $module .'|'. $delta;
 			}
 		}
-	}
+	}*/
 }
 
 function student_crm_blocks_block_view($delta) {
-	$delta = explode('\\', $delta);
+	$delta = explode('|', $delta);
 	if(!isset($_GET['ajaxBlocks'])) {
 		drupal_add_js(drupal_get_path('module', 'student_crm_blocks') .'/js/student_crm_blocks.js');
 		drupal_add_css(drupal_get_path('module', 'student_crm_blocks') .'/css/student_crm_blocks.css');
