@@ -1,0 +1,65 @@
+<?php
+
+function student_crm_blocks_menu() {
+	$items['ajax/blocks/%/%'] = array(
+		
+	);
+}
+
+function student_crm_blocks_form_block_admin_configure_alter(&$form, $form_state) {
+	$settings = variable_get('student_crm_blocks', array());
+	$form['visibility']['ajax'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Load via AJAX',
+		'#collapsible' => TRUE,
+		'#collapsed' => TRUE,
+	);
+	
+	$form['visibility']['ajax']['student_crm_blocks_ajax'] = array(
+		'#type' => 'checkbox',
+		'#title' => 'Load via AJAX',
+		'#default_value' => $settings[$form['module']['#value']][$form['delta']['#value']],
+	);
+	$form['#submit'][] = 'student_crm_blocks_form_block_admin_configure_alter_submit';
+}
+
+function student_crm_blocks_form_block_admin_configure_alter_submit($form, $form_state) {
+	$settings = variable_get('student_crm_blocks', array());
+	$settings[$form_state['build_info']['args'][0]][$form_state['build_info']['args'][1]] =
+		$form_state['values']['student_crm_blocks_ajax'];
+	variable_set('student_crm_blocks', $settings);
+}
+
+function student_crm_blocks_block_info_alter(&$blocks, $theme, $code_blocks) {
+	$settings = variable_get('student_crm_blocks', array());
+	foreach($settings as $module => $deltas) {
+		foreach($deltas as $delta => $ajax) {
+			if($ajax) {
+				$blocks[$module][$delta]['module'] = 'student_crm_blocks';
+				$blocks[$module][$delta]['delta']  = $module .'\\'. $delta;
+			}
+		}
+	}
+}
+
+function student_crm_blocks_block_view($delta) {
+	$delta = explode('\\', $delta);
+	if(!isset($_GET['ajaxBlocks'])) {
+		drupal_add_js(drupal_get_path('module', 'student_crm_blocks') .'/js/student_crm_blocks.js');
+		drupal_add_css(drupal_get_path('module', 'student_crm_blocks') .'/css/student_crm_blocks.css');
+		return array('content' => theme('ajax_loading_block', array('module' => $delta[0],
+																'delta' => $delta[1])));
+	}
+	else {
+		return module_invoke($delta[0], 'block_view', $delta[1]);
+	}
+}
+
+function student_crm_blocks_theme() {
+	return array(
+		'ajax_loading_block' => array(
+			'variables' => array('module' => NULL, 'delta' => NULL),
+			'template' => 'theme/ajax_block',
+		),
+	);
+}
