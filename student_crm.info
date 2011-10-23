@@ -51,6 +51,7 @@ dependencies[] = entity
 dependencies[] = features
 dependencies[] = field_group
 dependencies[] = guiders_js
+dependencies[] = interface
 dependencies[] = job_scheduler
 dependencies[] = libraries
 dependencies[] = link
