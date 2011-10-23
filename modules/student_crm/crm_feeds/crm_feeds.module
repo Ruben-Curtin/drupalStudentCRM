@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function crm_feeds_feeds_plugins() {
+  $info['CRMFeedsContactProcessor'] = array(
+    'name' => 'CRM Contact processor',
+    'description' => 'Create and update CRM contacts.',
+    'help' => 'Create and update CRM contacts from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'CRMFeedsContactProcessor',
+      'file' => 'CRMFeedsContactProcessor.inc',
+      'path' => drupal_get_path('module', 'crm_feeds') .'/plugins',
+    ),
+  );
+  $info['CRMFeedsActivityProcessor'] = array(
+    'name' => 'CRM Activity processor',
+    'description' => 'Create and update CRM activities.',
+    'help' => 'Create and update CRM activities from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'CRMFeedsActivityProcessor',
+      'file' => 'CRMFeedsActivityProcessor.inc',
+      'path' => drupal_get_path('module', 'crm_feeds') .'/plugins',
+    ),
+  );
+  return $info;
+}
+
+/*
+ * Implements hook_enable().
+ */
+function crm_feeds_enable() {
+  //clear the cache to display in Feeds as available plugin.
+  cache_clear_all('plugins:feeds:plugins', 'cache');
+}

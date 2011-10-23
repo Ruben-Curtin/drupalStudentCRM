@@ -1,0 +1,7 @@
+name=CRM Features
+description=Exposes CRM entities as exportable features
+package=CRM
+core=7.x
+
+dependencies[]=crm
+dependencies[]=features

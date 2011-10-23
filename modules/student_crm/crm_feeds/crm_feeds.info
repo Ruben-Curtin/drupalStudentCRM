@@ -1,0 +1,7 @@
+name=CRM Feeds
+description=Exposes CRM entities for feed importers
+package=CRM
+core=7.x
+
+dependencies[] = crm
+dependencies[] = feeds

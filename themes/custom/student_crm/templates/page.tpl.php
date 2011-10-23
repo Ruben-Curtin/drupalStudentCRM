@@ -82,7 +82,7 @@
 				
 				<?php if($page['content_bottom']): ?>
 					<div id="content-bottom" class="content-area">
-						<?php print render($page['sidebar_left']); ?>
+						<?php print render($page['content_bottom']); ?>
 					</div>
 				<?php endif; ?>
 			</div>
