@@ -46,7 +46,7 @@ function crm_activity_features_export($data, &$export, $module_name = '') {
 function crm_activity_features_export_render($module, $data, $export = NULL) {
   $elements = array(
     'type' => TRUE,
-    'name' => FALSE,
+    'label' => FALSE,
     'description' => TRUE,
   );
   $output = array();
