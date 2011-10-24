@@ -1,4 +1,12 @@
 name=CRM History
 description=Provides a recent history of viewed entities.
-package=CRM
+package=Student CRM
 core=7.x
+
+dependencies[] = "context"
+dependencies[] = "crm_history"
+dependencies[] = "image"
+
+features[context][] = "crm_history"
+features[ctools][] = "context:context:3"
+features[image][] = "history_small"
