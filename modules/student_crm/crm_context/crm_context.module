@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implements hook_context_plugins().
+ */
+function crm_context_context_plugins() {
+  $plugins = array();
+  $plugins['crm_context_condition_contact_type'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'crm_context') .'/plugins',
+      'file' => 'crm_context_context_condition_contact_type.inc',
+      'class' => 'crm_context_context_condition_contact_type',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+/**
+ * Implements hook_context_registry().
+ */
+function crm_context_context_registry() {
+  return array(
+    'conditions' => array(
+      'crm_context_condition_contact_type' => array(
+        'title' => t('CRM Contact type'),
+        'plugin' => 'crm_context_condition_contact_type',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_context_page_condition().
+ */
+function crm_context_context_page_condition() {
+  if ($plugin = context_get_plugin('condition', 'crm_context_condition_contact_type')) {
+    $item = menu_get_item();
+    if(isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
+	    $contact = $item['page_arguments'][0];
+	    $op = (arg(3) == 'edit')
+	    	   ? 'form'
+	    	   : 'view';
+	    $plugin->execute($contact, $op);
+	}
+  }
+}

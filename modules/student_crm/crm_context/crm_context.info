@@ -1,0 +1,4 @@
+name=CRM Context
+description=Context conditions and reactions for the CRM module.
+package=CRM
+core=7.x
