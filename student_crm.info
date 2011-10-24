@@ -65,3 +65,8 @@ dependencies[] = webform
 dependencies[] = crm
 dependencies[] = crm_activity
 
+;student crm
+dependencies[] = crm_features
+dependencies[] = crm_feed
+dependencies[] = crm_student
+dependencies[] = student_crm_blocks
