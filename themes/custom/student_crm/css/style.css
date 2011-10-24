@@ -247,6 +247,10 @@ input.search-box {
   padding: 0;
 }
 /** PAGE **/
+#page #page-title {
+  margin: .5em 0px;
+  font-size: 2.7em;
+}
 #page .container {
   padding: 15px 10px;
 }
@@ -339,6 +343,12 @@ a.add {
 }
 #sidebar-left .block-menu li a.active {
   background: #e1d9cc;
+}
+/** VIEWS **/
+.view .view-empty {
+  font-size: 1.7em;
+  color: #999999;
+  text-align: center;
 }
 /** TABS **/
 ul.tabs {
