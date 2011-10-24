@@ -1,6 +1,9 @@
 ; Use this file to build a full distribution including Drupal core and the
 ; Student CRM profile using the following command:
 ;
+; This file is for folks who can't use GIT through their firewall (like us!),
+; and need to use HTTP instead.
+;
 ; drush make distro.make <target directory>
 
 api = 2
