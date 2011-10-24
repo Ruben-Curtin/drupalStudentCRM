@@ -186,12 +186,14 @@ body {
 .narrow {
   width: 200px;
 }
+.sidebar ul {
+  margin-left: 0;
+}
 .left {
   float: left;
-  z-index: 100;
 }
 .sidebar.left {
-  padding: 0 0 0 10px;
+  padding: 10px 0 0 10px;
 }
 .right {
   float: right;
@@ -318,6 +320,25 @@ a.add {
 }
 #messages .messages.error .message-icon {
   background-position: 2px -42px;
+}
+/** MAIN NAVIGATION SIDEBAR **/
+#sidebar-left .block-menu li, #sidebar-left .block-menu ul {
+  list-style-type: none;
+  list-style-image: none;
+}
+#sidebar-left .block-menu li a {
+  font-size: 130%;
+  color: #6e5d40;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px #ffffff;
+  -webkit-text-shadow: 1px 1px 2px #ffffff;
+  -moz-text-shadow: 1px 1px 2px #ffffff;
+  display: block;
+  padding: 2px 0 2px 10px;
+  margin-right: -1px;
+}
+#sidebar-left .block-menu li a.active {
+  background: #e1d9cc;
 }
 /** TABS **/
 ul.tabs {
