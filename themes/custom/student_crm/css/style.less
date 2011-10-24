@@ -154,9 +154,17 @@ a.add { margin: 10px 0; }
 	#messages .messages.error .message-icon { background-position: 2px -42px; }	
 
 /** MAIN NAVIGATION SIDEBAR **/
-#sidebar-left .block-menu li, #sidebar-left .block-menu ul { list-style-type: none; list-style-image: none; }
-	#sidebar-left .block-menu li a { font-size: 130%; color: darken(@body-background, 60%); text-decoration: none; .text-shadow(1px, 1px, 2px, #fff); display: block; padding: 2px 0 2px 10px; margin-right: -1px; }
+#sidebar-left li, #sidebar-left ul { list-style-type: none; list-style-image: none; }
+	#sidebar-left li { margin-left: 0px; }
+	#sidebar-left a { color: darken(@body-background, 65%); text-decoration: none; }
+	#sidebar-left .block-menu li a { font-size: 130%;  .text-shadow(1px, 1px, 2px, #fff); display: block; padding: 2px 0 2px 10px; margin-right: -1px; }
 		#sidebar-left .block-menu li a.active { background: darken(@body-background, 10%); }
+
+#sidebar-left .history img { margin-bottom: -10px; }
+	#sidebar-left .history li { margin-bottom: 15px; }
+#sidebar-left .block { margin: 20px 0 0 0; }
+
+#sidebar-left .block-title { border-bottom: 1px solid darken(@body-background, 20%); color: darken(@body-background, 65%); width: @min-width / 4; margin-left: -@sidebar-padding; font-size: 1.5em;  }
 
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
