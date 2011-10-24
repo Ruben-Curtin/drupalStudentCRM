@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CRM Advisor feature.
+ */
+
+include_once('crm_advisor.features.inc');
