@@ -37,7 +37,12 @@ function crm_context_context_page_condition() {
   if ($plugin = context_get_plugin('condition', 'crm_context_condition_contact_type')) {
     $item = menu_get_item();
     if(isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
-	    $contact = $item['page_arguments'][0];
+	    if($item['page_callback'] == 'crm_contact_view') {
+	    	$contact = $item['page_arguments'][0];
+	    }
+	    elseif($item['page_callback'] == 'drupal_get_form') {
+	    	$contact = $item['page_arguments'][1];
+	    }
 	    $op = (arg(3) == 'edit')
 	    	   ? 'form'
 	    	   : 'view';
