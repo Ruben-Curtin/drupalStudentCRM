@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * student_crm_contacts.views_default.inc
+ * crm_student.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function student_crm_contacts_views_default_views() {
+function crm_student_views_default_views() {
   $export = array();
 
   $view = new view;

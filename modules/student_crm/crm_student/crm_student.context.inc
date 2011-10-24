@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * student_crm_contacts.context.inc
+ * crm_student.context.inc
  */
 
 /**
  * Implements hook_context_default_contexts().
  */
-function student_crm_contacts_context_default_contexts() {
+function crm_student_context_default_contexts() {
   $export = array();
 
   $context = new stdClass;

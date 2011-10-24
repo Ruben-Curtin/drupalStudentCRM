@@ -334,6 +334,68 @@ function crm_student_field_default_fields() {
     ),
   );
 
+  // Exported field: 'crm_contact-student-field_student_id'
+  $fields['crm_contact-student-field_student_id'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_student_id',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'student',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'The unique ID for the student, used to relate back to the Student Information System.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 6,
+        ),
+      ),
+      'entity_type' => 'crm_contact',
+      'field_name' => 'field_student_id',
+      'label' => 'Student ID',
+      'required' => 1,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'crm_contact-student-field_student_status'
   $fields['crm_contact-student-field_student_status'] = array(
     'field_config' => array(
@@ -527,6 +589,8 @@ function crm_student_field_default_fields() {
   t('Last name');
   t('Name');
   t('Status');
+  t('Student ID');
+  t('The unique ID for the student, used to relate back to the Student Information System.');
 
   return $fields;
 }
