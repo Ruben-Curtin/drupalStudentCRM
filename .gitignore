@@ -1,2 +1,18 @@
 
 modules/student_crm/crm_note/crm_note.admin.inc
+
+modules/student_crm/crm_note/crm_note.info
+
+modules/student_crm/crm_note/crm_note.admin.inc
+
+modules/student_crm/crm_note/README.txt
+
+modules/student_crm/crm_note/crm_note.module
+
+modules/student_crm/crm_note/crm_note_type.admin.inc
+
+modules/student_crm/crm_note/views/crm_note.views.inc
+
+modules/student_crm/crm_note/views/crm_note_handler_delete_link_field.inc
+
+modules/student_crm/crm_note/views/crm_note_handler_model_operations_field.inc
