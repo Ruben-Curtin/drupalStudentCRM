@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function crm_history_block_info() {
+	$blocks['crm_history'] = array('info' => 'History');
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function crm_history_block_view($delta) {
+	if(!user_access('track user history')) {
+		return;
+	}
+	
+	$history = (isset($_SESSION['crm_history'])) ? $_SESSION['crm_history'] : array();
+	$items = array();
+	if(!count($history)) {
+		$items[] = 'No history avaialble.';
+	}
+	else {
+		foreach($_SESSION['crm_history'] as $history) {
+			$text = '';
+			if($history['image'][0]['uri']) {
+				$text .= theme('image_style', array('style_name' => 'history_small',
+												  'path' => $history['image'][0]['uri'])) .' '; 
+			}
+			$text .= $history['title'][0]['safe_value'];
+			$items[] = l($text, $history['path'], array('html' => true));
+		}
+		
+		$items[] = l('Clear history', 'crm/history/clear', array('query' => array('destination' => $_GET['q'])));
+		$output = theme('item_list', array('attributes' => array('class' => 'history'), 'items' => $items));
+	}
+	return array('subject' => 'Recently viewed',
+				 'content' => $output);
+}
+
+/**
+ * Helper function to retrieve contact information from current page.
+ */
+function _crm_history_get_contact() {
+	$item = menu_get_item();
+    if(isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
+	    if($item['page_callback'] == 'crm_contact_view') {
+	    	return $item['page_arguments'][0];
+	    }
+	    elseif($item['page_callback'] == 'drupal_get_form') {
+	    	return $item['page_arguments'][1];
+	    }
+	}
+}
+
+/**
+ * Implements hook_menu().
+ */
+function crm_history_menu() {
+	$items = array();
+	
+	$items['crm/history/clear'] = array(
+		'title' => 'Clear history',
+		'page callback' => 'crm_history_clear',
+		'access arguments' => array('track user history'),
+	);
+	
+	$items['admin/config/crm_history'] = array(
+		'title' => 'CRM History',
+		'description' => 'Manage how history is tracked for users.',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('crm_history_admin_form'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 'crm_history.admin.inc',
+	);
+	
+	return $items;
+}
+
+/**
+ * Menu callback to clear user history.
+ */
+function crm_history_clear() {
+	$_SESSION['crm_history'] = array();
+	drupal_set_message(t('History cleared.'));
+	$destination = (isset($_GET['destination']))
+				   ? $_GET['destination']
+				   : '<front>';
+	drupal_goto($destination);
+}
+
+function crm_history_permission() {
+	return array('track user history' => array('title' => 'Track user\'s history',
+											   'description' => 'Allow user to view recently viewed pages.'));
+}
+
+/**
+ * Implements hook_exit().
+ */
+function crm_history_exit() {
+	$contact = _crm_history_get_contact();
+	if($contact) {
+		if(!is_array($_SESSION['crm_history'])) {
+			$_SESSION['crm_history'] = array();
+		}
+		foreach($_SESSION['crm_history'] as $item) {
+			if($item['path'] == $_GET['q']) {
+				return;
+			}
+		}
+		$item = array('image' => field_get_items('crm_contact', $contact, 'contact_image'),
+					  'title' => field_get_items('crm_contact', $contact, 'contact_name'),
+					  'path' => $_GET['q']);
+		array_unshift($_SESSION['crm_history'], $item);
+		if(count($_SESSION['crm_history']) > variable_get('crm_history_max_items', 5)) {
+			$history = array_chunk($_SESSION['crm_history'], variable_get('crm_history_max_items', 5));
+			$_SESSION['crm_history'] = $history[0];
+		}
+
+	}
+}

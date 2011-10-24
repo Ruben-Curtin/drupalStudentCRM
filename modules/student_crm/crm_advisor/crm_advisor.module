@@ -5,3 +5,10 @@
  */
 
 include_once('crm_advisor.features.inc');
+
+function crm_advisor_permission() {
+	return array('advise students' => array(
+					'title' => 'Advise students',
+					'description' => 'User can view and create activities on students.',
+				);
+}

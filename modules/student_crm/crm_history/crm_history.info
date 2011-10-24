@@ -1,0 +1,4 @@
+name=CRM History
+description=Provides a recent history of viewed entities.
+package=CRM
+core=7.x
