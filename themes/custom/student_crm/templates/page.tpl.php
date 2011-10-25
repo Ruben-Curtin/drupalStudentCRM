@@ -53,9 +53,7 @@
 			<?php if(!$is_front && $title): ?>
 					<h2 id="page-title"><?php print $title; ?></h2>
 				<?php endif; ?>
-				<?php if ($tabs = render($tabs)): ?>
-		       		<div class="tabs"><?php print $tabs; ?></div>
-		      	<?php endif; ?>
+				
 				<?php if($page['help']): ?>
 					<div id="help">
 						<?php print render($page['help']); ?>
@@ -77,7 +75,9 @@
 						<div class="clear"></div>
 					</div>
 				<?php endif; ?>
-				
+				<?php if ($tabs = render($tabs)): ?>
+		       		<div class="tabs"><?php print $tabs; ?></div>
+		      	<?php endif; ?>
 				<?php print render($page['content']); ?>
 				
 				<?php if($page['content_bottom']): ?>

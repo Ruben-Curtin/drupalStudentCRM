@@ -1,0 +1,9 @@
+.contact-fields .contact-image { float: left; margin: 0 10px 0 0; }
+	.contact-fields .contact-image { -webkit-border-radius: 5px; border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; overflow: hidden; width: 150px; height: 150px;  }
+	.contact-fields h1.contact-name { margin: 0; }
+	.contact-fields.contact-header { height: 160px; }
+.page-crm-contact #page-title { display: none; }
+
+.student-status { font-size: 120%; font-weight: bold; border-radius: 0 4px 0 0; -webkit-border-radius: 0 4px 0 0; -moz-border-radius: 0 4px 0 0; padding: 4px; margin-bottom: 10px; }
+	.student-status.student-status-normal, .student-status student-status-good { background: #64bf00; color: #fff;}
+	.student-status.student-status-bad { background: #b43939; color: #fff; }

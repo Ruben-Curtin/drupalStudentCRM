@@ -3,6 +3,10 @@
  * @file
  */
 
+function crm_student_init() {
+  drupal_add_css(drupal_get_path('module', 'crm_student') .'/css/crm_student.css');
+}
+
 /**
 *	Implementation of hook_form_FORM_ID_alter
 *	Here we're changing how the search box works
