@@ -10,6 +10,9 @@ api = 2
 ;libraries[profiler][download][url] = "http://ftp.drupal.org/files/projects/profiler-7.x-2.x-dev.tar.gz"
 ;libraries[profiler][destination] = "libraries/profiler"
 
+projects[admin_menu][subdir] = "admin_menu"
+projects[admin_menu][version] = "3.0-rc1"
+
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta2"
 

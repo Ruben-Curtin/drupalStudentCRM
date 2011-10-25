@@ -11,7 +11,6 @@ dependencies[] = block
 dependencies[] = color
 dependencies[] = comment
 dependencies[] = contextual
-dependencies[] = dashboard
 dependencies[] = dblog
 dependencies[] = field
 dependencies[] = field_sql_storage
@@ -32,13 +31,13 @@ dependencies[] = shortcut
 dependencies[] = system
 dependencies[] = taxonomy
 dependencies[] = text
-dependencies[] = toolbar
 dependencies[] = trigger
 dependencies[] = update
 dependencies[] = user
 
 ;contrib
 dependencies[] = addressfield
+dependencies[] = admin_menu
 dependencies[] = cck_phone
 dependencies[] = context_ui
 dependencies[] = context
