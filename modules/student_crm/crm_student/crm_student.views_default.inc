@@ -86,6 +86,20 @@ function crm_student_views_default_views() {
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['empty_table'] = 0;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No students found.';
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  /* Relationship: Broken/missing handler */
+  $handler->display->display_options['relationships']['relation_advisor_user']['id'] = 'relation_advisor_user';
+  $handler->display->display_options['relationships']['relation_advisor_user']['table'] = 'crm_contact';
+  $handler->display->display_options['relationships']['relation_advisor_user']['field'] = 'relation_advisor_user';
+  $handler->display->display_options['relationships']['relation_advisor_user']['label'] = 'Advisor';
+  $handler->display->display_options['relationships']['relation_advisor_user']['required'] = 0;
   /* Field: CRM Contact: Contact ID */
   $handler->display->display_options['fields']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['fields']['contact_id']['table'] = 'crm_contact';
@@ -254,6 +268,31 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_degrees']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_student_degrees']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'relation_advisor_user';
+  $handler->display->display_options['fields']['name']['label'] = 'Advisor(s)';
+  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['name']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['name']['empty_zero'] = 1;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['name']['link_to_user'] = 1;
+  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
   /* Filter criterion: Contact: Name (contact_name) */
   $handler->display->display_options['filters']['contact_name_value']['id'] = 'contact_name_value';
   $handler->display->display_options['filters']['contact_name_value']['table'] = 'field_data_contact_name';
@@ -288,12 +327,15 @@ function crm_student_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No students found.'),
+    t('Advisor'),
     t('crm/contact/[contact_id]'),
     t('First Name'),
     t('Last name'),
     t('Student ID'),
     t('Status'),
     t('Degrees'),
+    t('Advisor(s)'),
     t('Name'),
     t('Page'),
   );

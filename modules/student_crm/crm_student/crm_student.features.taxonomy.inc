@@ -55,5 +55,28 @@ function crm_student_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'student_tags' => array(
+      'name' => 'Student tags',
+      'machine_name' => 'student_tags',
+      'description' => 'Free tags for students',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
   );
 }

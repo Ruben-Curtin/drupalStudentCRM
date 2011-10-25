@@ -43,8 +43,8 @@ function crm_student_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '200',
-          'height' => '200',
+          'width' => '150',
+          'height' => '150',
         ),
         'weight' => '1',
       ),
