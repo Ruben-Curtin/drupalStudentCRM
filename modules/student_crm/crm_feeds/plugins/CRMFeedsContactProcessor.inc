@@ -136,7 +136,6 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    */
   public function configForm(&$form_state) {
     $types = $this->getContactTypeNames();
-    dpm($types);
     array_walk($types, 'check_plain');
     $form = parent::configForm($form_state);
     $form['contact_type'] = array(
