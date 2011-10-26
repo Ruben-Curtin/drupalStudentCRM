@@ -24,7 +24,7 @@ projects[context][subdir] = "contrib"
 projects[context][version] = "3.0-beta2"
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.0-rc1"
+projects[ctools][version] = "1.x-dev"
 
 projects[email][subdir] = "contrib"
 projects[email][version] = "1.0"
@@ -33,7 +33,7 @@ projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-beta10"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "1.0-beta4"
+projects[features][version] = "1.x-dev"
 
 projects[feeds][subdir] = "contrib"
 projects[feeds][version] = "2.0-alpha4"
@@ -63,7 +63,7 @@ projects[relation][subdir] = "contrib"
 projects[relation][version] = "1.0-beta1"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.0-rc1"
+projects[views][version] = "3.x-dev"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.0-beta3"
