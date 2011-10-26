@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_crm_contact().
+ * Implements hook_crm_features_contact_defaults().
  */
-function crm_student_crm_contact() {
+function crm_student_crm_features_contact_defaults() {
   $items = array(
     'student' => array(
       'type' => t('student'),

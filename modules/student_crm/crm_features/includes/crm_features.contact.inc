@@ -65,7 +65,7 @@ function crm_contact_features_export_render($module, $data, $export = NULL) {
   $output[] = '  );';
   $output[] = '  return $items;';
   $output = implode("\n", $output);
-  return array('crm_contact' => $output);
+  return array('crm_features_contact_defaults' => $output);
 }
 
 /**
@@ -75,7 +75,7 @@ function crm_contact_features_export_render($module, $data, $export = NULL) {
  * name of module to revert content for
  */
 function crm_contact_features_revert($module = NULL) {
-  if ($default_types = features_get_default('crm_contact', $module)) {
+  if ($default_types = features_get_default('crm_features_contact_defaults', $module)) {
     foreach ($default_types as $type_name => $type_info) {
       db_delete('crm_contact_type')
         ->condition('type', $type_name)
