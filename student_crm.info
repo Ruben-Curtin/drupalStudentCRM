@@ -71,6 +71,7 @@ dependencies[] = crm_feeds
 dependencies[] = crm_student
 dependencies[] = crm_advisor
 dependencies[] = crm_history
+dependencies[] = crm_case
 ;dependencies[] = student_crm_blocks
 
 ; variables
