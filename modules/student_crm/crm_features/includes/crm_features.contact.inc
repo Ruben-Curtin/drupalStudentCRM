@@ -30,7 +30,7 @@ function crm_contact_features_export($data, &$export, $module_name = '') {
       }
     }
   }
-
+  
   return $pipe;
 }
 
@@ -111,9 +111,14 @@ function crm_contact_features_disable($module) {
 function crm_contact_features_enable($module) {
   if ($default_types = features_get_default('crm_contact', $module)) {
     foreach ($default_types as $type_name => $type_info) {
+      $type_info = (object)$type_info;
       // Ensure the type exists.
       if ($type_info = crm_contact_type_load($type_name)) {
         $type_info->custom = 0;
+        crm_contact_type_save($type_info);
+      }
+      else {
+        $type_info->is_new = TRUE;
         crm_contact_type_save($type_info);
       }
     }
