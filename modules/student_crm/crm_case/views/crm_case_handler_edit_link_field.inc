@@ -7,7 +7,7 @@
  */
 
 
-class model_handler_edit_link_field extends model_handler_link_field {
+class crm_case_handler_edit_link_field extends crm_case_handler_link_field {
   function construct() {
     parent::construct();
     $this->additional_fields['type'] = 'type';
@@ -17,15 +17,15 @@ class model_handler_edit_link_field extends model_handler_link_field {
   function render($values) {
     $type = $values->{$this->aliases['type']};
     
-    //Creating a dummy model to check access against
-    $dummy_model = (object) array('type' => $type);
-    if (!model_access('edit', $dummy_model)) {
+    //Creating a dummy crm_case to check access against
+    $dummy_crm_case = (object) array('type' => $type);
+    if (!crm_case_access('edit', $dummy_crm_case)) {
       return;
     }
     
     $text = !empty($this->options['text']) ? $this->options['text'] : t('edit');
-    $model_id = $values->{$this->aliases['model_id']};
+    $cid = $values->{$this->aliases['cid']};
     
-    return l($text, 'admin/content/models/model/' . $model_id . '/edit');
+    return l($text, 'crm/cases/case/' . $cid . '/edit');
   }
 }

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Module for the Model Entity - a starting point to create your own Entity
+ * Module for the CRMCase Entity - a starting point to create your own Entity
  * and associated administration interface
  */  
 
@@ -17,15 +17,15 @@
  */
 function crm_case_entity_info() {
   $return['crm_case'] = array(
-    'label' => t('Case'),
+    'label' => t('CRM Case'),
     // The entity class and controller class extend the classes provided by the
     // Entity API
-    'entity class' => 'Case',
-    'controller class' => 'ModelController',
+    'entity class' => 'CRMCase',
+    'controller class' => 'CRMCaseController',
     'base table' => 'crm_case',
     'fieldable' => TRUE,
     'entity keys' => array(
-        'id' => 'crm_case_id',
+        'id' => 'cid',
         'bundle' => 'type',
     ),
     // Bundles are defined by the crm_case types below
@@ -39,19 +39,19 @@ function crm_case_entity_info() {
     'creation callback' => 'crm_case_create',
     'access callback' => 'crm_case_access',
     'module' => 'crm_case',
-    // The information below is used by the ModelUIController (which extends the EntityDefaultUIController)
+    // The information below is used by the CRMCaseUIController (which extends the EntityDefaultUIController)
     'admin ui' => array(
-      'path' => 'admin/content/crm_cases',
+      'path' => 'crm/cases',
       'file' => 'crm_case.admin.inc',
-      'controller class' => 'ModelUIController',
+      'controller class' => 'CRMCaseUIController',
       'menu wildcard' => '%crm_case',
     ),
   );
   // The entity that holds information about the entity types	  
   $return['crm_case_type'] = array(
-    'label' => t('Model Type'),
-    'entity class' => 'ModelType',
-    'controller class' => 'ModelTypeController',
+    'label' => t('CRM Case Type'),
+    'entity class' => 'CRMCaseType',
+    'controller class' => 'CRMCaseTypeController',
     'base table' => 'crm_case_type',
     'fieldable' => FALSE,
     'bundle of' => 'crm_case',
@@ -65,9 +65,9 @@ function crm_case_entity_info() {
     'module' => 'crm_case',
     // Enable the entity API's admin UI.
     'admin ui' => array(
-      'path' => 'admin/structure/crm_case_types',
+      'path' => 'crm/admin/case-types',
       'file' => 'crm_case_type.admin.inc',
-      'controller class' => 'ModelTypeUIController',
+      'controller class' => 'CRMCaseTypeUIController',
     ),
   );
 
@@ -88,8 +88,8 @@ function crm_case_entity_info_alter(&$entity_info) {
     $entity_info['crm_case']['bundles'][$type] = array(
       'label' => $info->label,
       'admin' => array(
-        'path' => 'admin/structure/crm_case_types/manage/%crm_case_type',
-        'real path' => 'admin/structure/crm_case_types/manage/' . $type,
+        'path' => 'crm/admin/case-types/manage/%crm_case_type',
+        'real path' => 'crm/admin/case-types/manage/' . $type,
         'bundle argument' => 4,
         'access arguments' => array('administer crm_case types'),
       ),
@@ -172,7 +172,7 @@ function crm_case_type_access($op, $type = NULL, $account = NULL) {
  *
  * @param $type_name
  *   If set, the type with the given name is returned.
- * @return ModelType[]
+ * @return CRMCaseType[]
  *   Depending whether $type isset, an array of crm_case types or a single one.
  */
 function crm_case_get_types($type_name = NULL) {
@@ -200,7 +200,7 @@ function crm_case_type_load($type) {
  * Fetch a crm_case object. Make sure that the wildcard you choose 
  * in the crm_case entity definition fits the function name here.
  *
- * @param $crm_case_id
+ * @param $cid
  *   Integer specifying the crm_case id.
  * @param $reset
  *   A boolean indicating that the internal cache should be reset.
@@ -209,8 +209,8 @@ function crm_case_type_load($type) {
  *
  * @see crm_case_load_multiple()
  */
-function crm_case_load($crm_case_id, $reset = FALSE) {
-  $crm_cases = crm_case_load_multiple(array($crm_case_id), array(), $reset);
+function crm_case_load($cid, $reset = FALSE) {
+  $crm_cases = crm_case_load_multiple(array($cid), array(), $reset);
   return reset($crm_cases);
 }
 
@@ -218,27 +218,27 @@ function crm_case_load($crm_case_id, $reset = FALSE) {
 /**
  * Load multiple crm_cases based on certain conditions.
  *
- * @param $crm_case_ids
+ * @param $cids
  *   An array of crm_case IDs.
  * @param $conditions
  *   An array of conditions to match against the {crm_case} table.
  * @param $reset
  *   A boolean indicating that the internal cache should be reset.
  * @return
- *   An array of crm_case objects, indexed by crm_case_id.
+ *   An array of crm_case objects, indexed by cid.
  *
  * @see entity_load()
  * @see crm_case_load()
  */
-function crm_case_load_multiple($crm_case_ids = array(), $conditions = array(), $reset = FALSE) {
-  return entity_load('crm_case', $crm_case_ids, $conditions, $reset);
+function crm_case_load_multiple($cids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('crm_case', $cids, $conditions, $reset);
 }
 
 
 /**
  * Deletes a crm_case.
  */
-function crm_case_delete(Model $crm_case) {
+function crm_case_delete(CRMCase $crm_case) {
   $crm_case->delete();
 }
 
@@ -246,11 +246,11 @@ function crm_case_delete(Model $crm_case) {
 /**
  * Delete multiple crm_cases.
  *
- * @param $crm_case_ids
+ * @param $cids
  *   An array of crm_case IDs.
  */
-function crm_case_delete_multiple(array $crm_case_ids) {
-  entity_get_controller('crm_case')->delete($crm_case_ids);
+function crm_case_delete_multiple(array $cids) {
+  entity_get_controller('crm_case')->delete($cids);
 }
 
 
@@ -268,7 +268,7 @@ function crm_case_create($values = array()) {
  * @param $crm_case
  *   The crm_case object.
  */
-function crm_case_save(Model $crm_case) {
+function crm_case_save(CRMCase $crm_case) {
   return $crm_case->save();
 }
 
@@ -276,7 +276,7 @@ function crm_case_save(Model $crm_case) {
 /**
  * Saves a crm_case type to the db.
  */
-function crm_case_type_save(ModelType $type) {
+function crm_case_type_save(CRMCaseType $type) {
   $type->save();
 }
 
@@ -284,7 +284,7 @@ function crm_case_type_save(ModelType $type) {
 /**
  * Deletes a crm_case type from the db.
  */
-function crm_case_type_delete(ModelType $type) {
+function crm_case_type_delete(CRMCaseType $type) {
   $type->delete();
 }
 
@@ -292,9 +292,9 @@ function crm_case_type_delete(ModelType $type) {
 /**
  * URI callback for crm_cases
  */
-function crm_case_uri(Model $crm_case){
+function crm_case_uri(CRMCase $crm_case){
   return array(
-    'path' => 'crm_case/' . $crm_case->crm_case_id,
+    'path' => 'crm_case/' . $crm_case->cid,
   );
 }
 
@@ -302,7 +302,7 @@ function crm_case_uri(Model $crm_case){
 /**
  * Menu title callback for showing individual entities
  */
-function crm_case_page_title(Model $crm_case){
+function crm_case_page_title(CRMCase $crm_case){
   return $crm_case->name;
 }
 
@@ -313,7 +313,7 @@ function crm_case_page_title(Model $crm_case){
  */
 function crm_case_page_view($crm_case, $view_mode = 'full') {    
   $controller = entity_get_controller('crm_case');  
-  $content = $controller->view(array($crm_case->crm_case_id => $crm_case));
+  $content = $controller->view(array($crm_case->cid => $crm_case));
   drupal_set_title($crm_case->name);
   return $content;
 }
@@ -358,8 +358,8 @@ function crm_case_theme() {
  */
 function crm_case_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   // Add action link 'admin/structure/crm_cases/add' on 'admin/structure/crm_cases'.
-  if ($root_path == 'admin/content/crm_cases') {
-    $item = menu_get_item('admin/content/crm_cases/add');
+  if ($root_path == 'crm/cases') {
+    $item = menu_get_item('crm/cases/add');
     if ($item['access']) {
       $data['actions']['output'][] = array(
         '#theme' => 'menu_local_action',
@@ -373,7 +373,7 @@ function crm_case_menu_local_tasks_alter(&$data, $router_item, $root_path) {
 /**
  * The class used for crm_case entities
  */
-class Model extends Entity {
+class CRMCase extends Entity {
   
   public function __construct($values = array()) {
     parent::__construct($values, 'crm_case');
@@ -384,7 +384,7 @@ class Model extends Entity {
   }
 
   protected function defaultUri() {
-    return array('path' => 'crm_case/' . $this->crm_case_id);
+    return array('path' => 'crm/case/' . $this->cid);
   }
   
   
@@ -394,7 +394,7 @@ class Model extends Entity {
 /**
  * The class used for crm_case type entities
  */
-class ModelType extends Entity {
+class CRMCaseType extends Entity {
   
   public $type;
   public $label;
@@ -407,9 +407,9 @@ class ModelType extends Entity {
 
 
 /**
- * The Controller for Model entities
+ * The Controller for CRMCase entities
  */
-class ModelController extends EntityAPIController {
+class CRMCaseController extends EntityAPIController {
   public function __construct($entityType) {
     parent::__construct($entityType);
   }
@@ -427,9 +427,9 @@ class ModelController extends EntityAPIController {
    *   A crm_case object with all default fields initialized.
    */
   public function create(array $values = array()) {
-    // Add values that are specific to our Model
+    // Add values that are specific to our CRMCase
     $values += array( 
-      'crm_case_id' => '',
+      'cid' => '',
       'is_new' => TRUE,
       'title' => '',
       'created' => '',
@@ -457,9 +457,9 @@ class ModelController extends EntityAPIController {
 
 
 /**
- * The Controller for Model entities
+ * The Controller for CRMCase entities
  */
-class ModelTypeController extends EntityAPIControllerExportable {
+class CRMCaseTypeController extends EntityAPIControllerExportable {
   public function __construct($entityType) {
     parent::__construct($entityType);
   }
@@ -476,7 +476,7 @@ class ModelTypeController extends EntityAPIControllerExportable {
    *   A crm_case type object with all default fields initialized.
    */
   public function create(array $values = array()) {
-    // Add values that are specific to our Model
+    // Add values that are specific to our CRMCase
     $values += array( 
       'id' => '',
       'is_new' => TRUE,
@@ -486,4 +486,138 @@ class ModelTypeController extends EntityAPIControllerExportable {
     return $crm_case_type;
   }
 
+}
+
+/**
+ * UI controller.
+ */
+class CRMCaseUIController extends EntityDefaultUIController {
+
+  /**
+   * Overrides hook_menu() defaults. Main reason for doing this is that
+   * parent class hook_menu() is optimized for entity type administration.
+   */
+  public function hook_menu() {
+    
+    $items = array();
+    $id_count = count(explode('/', $this->path));
+    $wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%' . $this->entityType;
+
+    $items[$this->path] = array(
+      'title' => 'CRMCases',
+      'description' => 'Add edit and update crm_cases.',
+      'page callback' => 'system_admin_menu_block_page',
+      'access arguments' => array('access administration pages'),
+      'file path' => drupal_get_path('module', 'system'),
+      'file' => 'system.admin.inc',
+    );
+    
+    // Change the overview menu type for the list of crm_cases.
+    $items[$this->path]['type'] = MENU_LOCAL_TASK;
+    
+    // Change the add page menu to multiple types of entities
+    $items[$this->path . '/add'] = array(
+      'title' => 'Add a crm_case',
+      'description' => 'Add a new crm_case',
+      'page callback'  => 'crm_case_add_page',
+      'access callback'  => 'crm_case_access',
+      'access arguments' => array('edit'),
+      'type' => MENU_NORMAL_ITEM,
+      'weight' => 20,
+      'file' => 'crm_case.admin.inc',
+      'file path' => drupal_get_path('module', $this->entityInfo['module'])
+
+    );
+    
+    // Add menu items to add each different type of entity.
+    foreach (crm_case_get_types() as $type) {
+      $items[$this->path . '/add/' . $type->type] = array(
+        'title' => 'Add ' . $type->label,
+        'page callback' => 'crm_case_form_wrapper',
+        'page arguments' => array(crm_case_create(array('type' => $type->type))),
+        'access callback' => 'crm_case_access',
+        'access arguments' => array('edit', 'edit ' . $type->type),
+        'file' => 'crm_case.admin.inc',
+        'file path' => drupal_get_path('module', $this->entityInfo['module'])
+      );
+    }
+
+    // Loading and editing crm_case entities
+    $items[$this->path . '/case/' . $wildcard] = array(
+      'page callback' => 'crm_case_form_wrapper',
+      'page arguments' => array($id_count + 1),
+      'access callback' => 'crm_case_access',
+      'access arguments' => array('edit', $id_count + 1),
+      'weight' => 0,
+      'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+      'file' => 'crm_case.admin.inc',
+      'file path' => drupal_get_path('module', $this->entityInfo['module'])
+    );
+    $items[$this->path . '/case/' . $wildcard . '/edit'] = array(
+      'title' => 'Edit',
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'weight' => -10,
+      'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+    );
+    
+    $items[$this->path . '/case/' . $wildcard . '/delete'] = array(
+      'title' => 'Delete',
+      'page callback' => 'crm_case_delete_form_wrapper',
+      'page arguments' => array($id_count + 1),
+      'access callback' => 'crm_case_access',
+      'access arguments' => array('edit', $id_count + 1),
+      'type' => MENU_LOCAL_TASK,
+      'context' => MENU_CONTEXT_INLINE,
+      'weight' => 10,
+      'file' => 'crm_case.admin.inc',
+      'file path' => drupal_get_path('module', $this->entityInfo['module'])
+    );
+    
+    // Menu item for viewing crm_cases
+    $items['crm_case/' . $wildcard] = array(
+      //'title' => 'Title',
+      'title callback' => 'crm_case_page_title',
+      'title arguments' => array(1),
+      'page callback' => 'crm_case_page_view',
+      'page arguments' => array(1),
+      'access callback' => 'crm_case_access',
+      'access arguments' => array('view', 1),
+      'type' => MENU_CALLBACK,
+    );
+    return $items;
+  }
+  
+  
+  /**
+   * Create the markup for the add CRMCase Entities page within the class
+   * so it can easily be extended/overriden.
+   */ 
+  public function addPage() {
+    $item = menu_get_item();
+    $content = system_admin_menu_block($item);
+
+    if (count($content) == 1) {
+      $item = array_shift($content);
+      drupal_goto($item['href']);
+    }    
+        
+    return theme('crm_case_add_list', array('content' => $content));
+  }
+  
+}
+
+/**
+ * UI controller.
+ */
+class CRMCaseTypeUIController extends EntityDefaultUIController {
+
+  /**
+   * Overrides hook_menu() defaults.
+   */
+  public function hook_menu() {
+    $items = parent::hook_menu();
+		$items[$this->path]['description'] = 'Manage crm_case entity types, including adding
+		and removing fields and the display of fields.';
+    return $items;
+  }
 }

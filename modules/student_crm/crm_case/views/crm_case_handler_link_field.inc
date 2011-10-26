@@ -6,11 +6,11 @@
  * as fields.
  */
 
-class model_handler_link_field extends views_handler_field {
+class crm_case_handler_link_field extends views_handler_field {
   function construct() {
     parent::construct();
 
-    $this->additional_fields['model_id'] = 'model_id';
+    $this->additional_fields['cid'] = 'cid';
     $this->additional_fields['type'] = 'type';
   }
 
@@ -39,8 +39,8 @@ class model_handler_link_field extends views_handler_field {
 
   function render($values) {
     $text = !empty($this->options['text']) ? $this->options['text'] : t('view');
-    $model_id = $values->{$this->aliases['model_id']};
+    $cid = $values->{$this->aliases['cid']};
 
-    return l($text, 'model/' . $model_id);
+    return l($text, 'crm_case/' . $cid);
   }
 }

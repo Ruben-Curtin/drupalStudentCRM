@@ -16,7 +16,7 @@ function crm_case_schema() {
   $schema['crm_case'] = array(
     'description' => 'The base table for crm_case entities.',
     'fields' => array(
-      'crm_case_id' => array(
+      'cid' => array(
         'description' => 'Primary Key: Identifier for a crm_case.',
         'type' => 'serial',
         'unsigned' => TRUE,
@@ -63,7 +63,7 @@ function crm_case_schema() {
         'description' => 'A serialized array of additional data.',
       ),
     ),
-    'primary key' => array('crm_case_id'),
+    'primary key' => array('cid'),
     'indexes' => array(
       'type' => array('type'),
     ),

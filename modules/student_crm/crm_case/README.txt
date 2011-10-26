@@ -1,6 +1,6 @@
 Introduction
 ------------
-The Model Entities module provides a fully working yet generic example
+The CRMCase Entities module provides a fully working yet generic example
 about what is good practice in creating and administering entities and integrating
 entities with the rest of Drupal Core and the Drupal ecosystem.
 
@@ -15,13 +15,13 @@ This module does not provide any functionality to non-developers.
 Installation
 -------------
 Once you activate the module it sets up an entity administration interface under
-Admnistration > Structure > Model Types
+Admnistration > Structure > CRMCase Types
 
 You can add crm_case entities via
 
-Administration > Content > Models
+Administration > Content > CRMCases
 
-Keep in mind that you need to create some Model Types before you can add entities.
+Keep in mind that you need to create some CRMCase Types before you can add entities.
 
 
 Using the code in your projects
@@ -38,7 +38,7 @@ Customising your entities in 3 simple steps.
 1. The first step is to customize your table in module.install by adding any column
 tables specific to your entity.
 
-Your would only every really need to change the Model entity and Model type as ModelType
+Your would only every really need to change the CRMCase entity and CRMCase type as CRMCaseType
 is simply there to provide a means to represent your different entity bundles.
 
 Also keep in mind that if you can get away with adding data only in serialized form in
@@ -46,7 +46,7 @@ the data column you can avoid doing anything to the tables.
 
 2. You would then want to customize the edit form for your entity - which you will find in
 crm_case.admin.inc and customize the behaviour of your entity on save, delete which you
-do via the ModelController class in crm_case.module.
+do via the CRMCaseController class in crm_case.module.
 
 Currently, I am overwriting the create function to add some extra info. If you stick to
 the $data variable and save extra data in serialized form (and not adding new columns

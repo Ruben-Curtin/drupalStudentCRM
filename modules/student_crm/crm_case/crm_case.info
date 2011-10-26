@@ -1,21 +1,7 @@
-name = Model
-description = Provides entity functionality as an example to use in your own development projects
-core = 7.x
+name=CRM Case
+description=Exposes a custom entity type for cases
+package=Student CRM
+core=7.x
 
-dependencies[] = entity
-dependencies[] = views
-
-files[] = crm_case.admin.inc
-files[] = crm_case_type.admin.inc
-files[] = views/crm_case.views.inc
-files[] = views/crm_case_handler_link_field.inc
-files[] = views/crm_case_handler_delete_link_field.inc
-files[] = views/crm_case_handler_edit_link_field.inc
-files[] = views/crm_case_handler_crm_case_operations_field.inc
-
-; Information added by drupal.org packaging script on 2011-07-03
-version = "7.x-1.0-alpha2"
-core = "7.x"
-project = "crm_case"
-datestamp = "1309730820"
-
+dependencies[]=crm
+dependencies[]=entity
