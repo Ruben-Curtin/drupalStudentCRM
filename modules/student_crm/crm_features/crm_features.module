@@ -3,12 +3,14 @@
 function crm_features_features_api() {
   return array(
     'crm_contact' => array(
+      'name' => t('CRM contact type'),
       'default_hook' => 'crm_features_contact_defaults',
       'default_file' => FEATURES_DEFAULTS_INCLUDED,
       'features_source' => TRUE,
       'file' => drupal_get_path('module', 'crm_features') .'/includes/crm_features.contact.inc',
     ),
     'crm_activity' => array(
+      'name' => t('CRM activity type'),
       'default_hook' => 'crm_features_activity_defaults',
       'default_file' => FEATURES_DEFAULTS_INCLUDED,
       'features_source' => TRUE,
