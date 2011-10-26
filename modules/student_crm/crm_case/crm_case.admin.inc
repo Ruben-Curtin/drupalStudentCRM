@@ -141,7 +141,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
  * @todo Remove hard-coded path
  */
 function crm_case_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'crm/cases/case/' . $form_state['crm_case']->cid . '/delete';
+  $form_state['redirect'] = 'crm/cases/' . $form_state['crm_case']->cid . '/delete';
 }
 
 

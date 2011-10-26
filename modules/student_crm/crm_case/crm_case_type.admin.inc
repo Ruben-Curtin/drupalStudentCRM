@@ -45,16 +45,6 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
     '#weight' => 40,
   );
 
-  //Locking not supported yet
-  /*if (!$crm_case_type->isLocked() && $op != 'add') {
-    $form['actions']['delete'] = array(
-      '#type' => 'submit',
-      '#value' => t('Delete crm_case type'),
-      '#weight' => 45,
-      '#limit_validation_errors' => array(),
-      '#submit' => array('crm_case_type_form_submit_delete')
-    );
-  }*/
   return $form;
 }
 

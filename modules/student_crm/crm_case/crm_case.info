@@ -1,7 +1,12 @@
-name=CRM Case
-description=Exposes a custom entity type for cases
-package=Student CRM
-core=7.x
-
-dependencies[]=crm
-dependencies[]=entity
+core = "7.x"
+dependencies[] = "crm"
+dependencies[] = "ctools"
+dependencies[] = "entity"
+dependencies[] = "relation"
+description = "Exposes a custom entity type for cases"
+features[ctools][] = "relation:relation_default:1"
+features[relation_type][] = "crm_case_activity"
+features[relation_type][] = "crm_contact_case"
+name = "CRM Case"
+package = "Student CRM"
+php = "5.2.4"

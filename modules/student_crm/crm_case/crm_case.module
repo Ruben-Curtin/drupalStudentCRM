@@ -6,6 +6,8 @@
  * and associated administration interface
  */  
 
+include_once('crm_case.features.inc');
+
 
 /**
  * Implement hook_entity_info().
