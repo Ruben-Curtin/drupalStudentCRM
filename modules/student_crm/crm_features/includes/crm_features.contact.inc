@@ -113,8 +113,9 @@ function crm_contact_features_enable($module) {
     foreach ($default_types as $type_name => $type_info) {
       $type_info = (object)$type_info;
       // Ensure the type exists.
-      if ($type_info = crm_contact_type_load($type_name)) {
-        $type_info->custom = 0;
+      if ($existing_type = crm_contact_type_load($type_name)) {
+        $existing_type = (object)$existing_type;
+        $existing_type->custom = 0;
         crm_contact_type_save($type_info);
       }
       else {
