@@ -6,22 +6,6 @@
  */
 
 /**
- * UI controller.
- */
-class ModelTypeUIController extends EntityDefaultUIController {
-
-  /**
-   * Overrides hook_menu() defaults.
-   */
-  public function hook_menu() {
-    $items = parent::hook_menu();
-		$items[$this->path]['description'] = 'Manage crm_case entity types, including adding
-		and removing fields and the display of fields.';
-    return $items;
-  }
-}
-
-/**
  * Generates the crm_case type editing form.
  */
 function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
@@ -53,16 +37,11 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
   );
 
   $form['data']['#tree'] = TRUE;
-  $form['data']['sample_data'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('An interesting crm_case switch'),
-    '#default_value' => !empty($crm_case_type->data['sample_data']),
-  );
 
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save crm_case type'),
+    '#value' => t('Save case type'),
     '#weight' => 40,
   );
 
@@ -85,12 +64,12 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
 function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type = entity_ui_form_submit_build_entity($form, $form_state);
   $crm_case_type->save();
-  $form_state['redirect'] = 'admin/structure/crm_case_types';
+  $form_state['redirect'] = 'crm/admin/case-types';
 }
 
 /**
  * Form API submit callback for the delete button.
  */
 function crm_case_type_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'admin/structure/crm_case_types/manage/' . $form_state['crm_case_type']->type . '/delete';
+  $form_state['redirect'] = 'crm/admin/case-types/manage/' . $form_state['crm_case_type']->type . '/delete';
 }
