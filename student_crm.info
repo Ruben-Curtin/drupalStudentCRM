@@ -5,7 +5,6 @@ files[] = student_crm.profile
 core = 7.x
 theme = student_crm
 
-
 ; Core
 dependencies[] = block
 dependencies[] = color
@@ -72,3 +71,9 @@ dependencies[] = crm_feeds
 dependencies[] = crm_history
 dependencies[] = crm_student
 dependencies[] = student_crm_blocks
+
+; variables
+variables[site_frontpage] = crm
+variables[site_403] = user/login
+variables[site_name] = Student CRM
+variables[admin_theme] = rubik

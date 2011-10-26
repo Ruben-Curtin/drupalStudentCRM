@@ -4,13 +4,14 @@ projects[drupal][type] = core
 core = 7.x
 api = 2
 
+
 ;Adding the profiler module
 ;Profiler is in dev and we can't patch libraries, so including it in the repository for now
 ;libraries[profiler][download][type] = "get"
 ;libraries[profiler][download][url] = "http://ftp.drupal.org/files/projects/profiler-7.x-2.x-dev.tar.gz"
 ;libraries[profiler][destination] = "libraries/profiler"
 
-projects[admin_menu][subdir] = "admin_menu"
+projects[admin_menu][subdir] = "contrib"
 projects[admin_menu][version] = "3.0-rc1"
 
 projects[addressfield][subdir] = "contrib"
@@ -69,6 +70,11 @@ projects[views_bulk_operations][version] = "3.0-beta3"
 
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.13"
+
+; Themes
+
+projects[rubik][subdir] = "contrib"
+projects[rubik][version] = "4.0-beta6"
 
 ; Modules in development
 
