@@ -65,13 +65,13 @@ dependencies[] = crm
 dependencies[] = crm_activity
 
 ;student crm
-dependencies[] = crm_advisor
 dependencies[] = crm_context
 dependencies[] = crm_features
 dependencies[] = crm_feeds
-dependencies[] = crm_history
 dependencies[] = crm_student
-dependencies[] = student_crm_blocks
+dependencies[] = crm_advisor
+dependencies[] = crm_history
+;dependencies[] = student_crm_blocks
 
 ; variables
 variables[site_frontpage] = crm
