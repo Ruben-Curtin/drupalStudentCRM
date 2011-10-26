@@ -1,0 +1,489 @@
+<?php
+
+/**
+ * @file
+ * Module for the Model Entity - a starting point to create your own Entity
+ * and associated administration interface
+ */  
+
+
+/**
+ * Implement hook_entity_info().
+ *
+ * We define two entities here - the actual entity that will hold our domain
+ * specific information and an entity that holds information about the different
+ * types of entities. See here: http://drupal.org/node/977380 for a discussion on this
+ * choice.
+ */
+function crm_case_entity_info() {
+  $return['crm_case'] = array(
+    'label' => t('Case'),
+    // The entity class and controller class extend the classes provided by the
+    // Entity API
+    'entity class' => 'Case',
+    'controller class' => 'ModelController',
+    'base table' => 'crm_case',
+    'fieldable' => TRUE,
+    'entity keys' => array(
+        'id' => 'crm_case_id',
+        'bundle' => 'type',
+    ),
+    // Bundles are defined by the crm_case types below
+    'bundles' => array(),
+    // Bundle keys tell the FieldAPI how to extract information from the bundle objects
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'label callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+    'creation callback' => 'crm_case_create',
+    'access callback' => 'crm_case_access',
+    'module' => 'crm_case',
+    // The information below is used by the ModelUIController (which extends the EntityDefaultUIController)
+    'admin ui' => array(
+      'path' => 'admin/content/crm_cases',
+      'file' => 'crm_case.admin.inc',
+      'controller class' => 'ModelUIController',
+      'menu wildcard' => '%crm_case',
+    ),
+  );
+  // The entity that holds information about the entity types	  
+  $return['crm_case_type'] = array(
+    'label' => t('Model Type'),
+    'entity class' => 'ModelType',
+    'controller class' => 'ModelTypeController',
+    'base table' => 'crm_case_type',
+    'fieldable' => FALSE,
+    'bundle of' => 'crm_case',
+    'exportable' => TRUE,
+    'entity keys' => array(
+      'id' => 'id',
+      'name' => 'type',
+      'label' => 'label',
+    ),
+    'access callback' => 'crm_case_type_access',
+    'module' => 'crm_case',
+    // Enable the entity API's admin UI.
+    'admin ui' => array(
+      'path' => 'admin/structure/crm_case_types',
+      'file' => 'crm_case_type.admin.inc',
+      'controller class' => 'ModelTypeUIController',
+    ),
+  );
+
+  return $return;
+}
+
+
+/**
+ * Implements hook_entity_info_alter().
+ *
+ * We are adding the info about the crm_case types via a hook to avoid a recursion
+ * issue as loading the crm_case types requires the entity info as well.
+ *
+ * @todo This needs to be improved
+ */
+function crm_case_entity_info_alter(&$entity_info) {
+  foreach (crm_case_get_types() as $type => $info) {
+    $entity_info['crm_case']['bundles'][$type] = array(
+      'label' => $info->label,
+      'admin' => array(
+        'path' => 'admin/structure/crm_case_types/manage/%crm_case_type',
+        'real path' => 'admin/structure/crm_case_types/manage/' . $type,
+        'bundle argument' => 4,
+        'access arguments' => array('administer crm_case types'),
+      ),
+    );
+  }
+}
+  
+
+/**
+ * Implements hook_permission().
+ */
+function crm_case_permission() {
+  // We set up permisssions to manage entity types, manage all entities and the
+  // permissions for each individual entity
+  $permissions = array(
+    'administer crm_case types' => array(
+      'title' => t('Administer crm_case types'),
+      'description' => t('Create and delete fields for crm_case types, and set their permissions.'),
+    ),
+    'administer crm_cases' => array(
+      'title' => t('Administer crm_cases'),
+      'description' => t('Edit and delete all crm_cases'),
+    ),  
+  );
+  
+  //Generate permissions per crm_case 
+  foreach (crm_case_get_types() as $type) {
+    $type_name = check_plain($type->type);
+    $permissions += array(
+      "edit any $type_name crm_case" => array(
+        'title' => t('%type_name: Edit any crm_case', array('%type_name' => $type->label)),
+      ),
+      "view any $type_name crm_case" => array(
+        'title' => t('%type_name: View any crm_case', array('%type_name' => $type->label)),
+      ),
+    );
+  }
+  return $permissions;  
+}
+
+
+/**
+ * Determines whether the given user has access to a crm_case.
+ *
+ * @param $op
+ *   The operation being performed. One of 'view', 'update', 'create', 'delete'
+ *   or just 'edit' (being the same as 'create' or 'update').
+ * @param $crm_case
+ *   Optionally a crm_case or a crm_case type to check access for. If nothing is
+ *   given, access for all crm_cases is determined.
+ * @param $account
+ *   The user to check for. Leave it to NULL to check for the global user.
+ * @return boolean
+ *   Whether access is allowed or not.
+ */
+function crm_case_access($op, $crm_case = NULL, $account = NULL) {
+  if (user_access('administer crm_cases', $account)) {
+    return TRUE;
+  }
+  if (isset($crm_case) && $type_name = $crm_case->type) {
+    $op = ($op == 'view') ? 'view' : 'edit';
+    if (user_access("$op any $type_name crm_case", $account)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+
+/**
+ * Access callback for the entity API.
+ */
+function crm_case_type_access($op, $type = NULL, $account = NULL) {
+  return user_access('administer crm_case types', $account);
+}
+
+
+/**
+ * Gets an array of all crm_case types, keyed by the type name.
+ *
+ * @param $type_name
+ *   If set, the type with the given name is returned.
+ * @return ModelType[]
+ *   Depending whether $type isset, an array of crm_case types or a single one.
+ */
+function crm_case_get_types($type_name = NULL) {
+  // entity_load will get the Entity controller for our crm_case entity and call the load
+  // function of that object - we are loading entities by name here.
+  $types = entity_load_multiple_by_name('crm_case_type', isset($type_name) ? array($type_name) : FALSE);
+  return isset($type_name) ? reset($types) : $types;
+}
+
+
+/**
+ * Menu argument loader; Load a crm_case type by string.
+ *
+ * @param $type
+ *   The machine-readable name of a crm_case type to load.
+ * @return
+ *   A crm_case type array or FALSE if $type does not exist.
+ */
+function crm_case_type_load($type) {
+  return crm_case_get_types($type);
+}
+
+
+/**
+ * Fetch a crm_case object. Make sure that the wildcard you choose 
+ * in the crm_case entity definition fits the function name here.
+ *
+ * @param $crm_case_id
+ *   Integer specifying the crm_case id.
+ * @param $reset
+ *   A boolean indicating that the internal cache should be reset.
+ * @return
+ *   A fully-loaded $crm_case object or FALSE if it cannot be loaded.
+ *
+ * @see crm_case_load_multiple()
+ */
+function crm_case_load($crm_case_id, $reset = FALSE) {
+  $crm_cases = crm_case_load_multiple(array($crm_case_id), array(), $reset);
+  return reset($crm_cases);
+}
+
+
+/**
+ * Load multiple crm_cases based on certain conditions.
+ *
+ * @param $crm_case_ids
+ *   An array of crm_case IDs.
+ * @param $conditions
+ *   An array of conditions to match against the {crm_case} table.
+ * @param $reset
+ *   A boolean indicating that the internal cache should be reset.
+ * @return
+ *   An array of crm_case objects, indexed by crm_case_id.
+ *
+ * @see entity_load()
+ * @see crm_case_load()
+ */
+function crm_case_load_multiple($crm_case_ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('crm_case', $crm_case_ids, $conditions, $reset);
+}
+
+
+/**
+ * Deletes a crm_case.
+ */
+function crm_case_delete(Model $crm_case) {
+  $crm_case->delete();
+}
+
+
+/**
+ * Delete multiple crm_cases.
+ *
+ * @param $crm_case_ids
+ *   An array of crm_case IDs.
+ */
+function crm_case_delete_multiple(array $crm_case_ids) {
+  entity_get_controller('crm_case')->delete($crm_case_ids);
+}
+
+
+/**
+ * Create a crm_case object.
+ */
+function crm_case_create($values = array()) {
+  return entity_get_controller('crm_case')->create($values);
+}
+
+
+/**
+ * Saves a crm_case to the database.
+ *
+ * @param $crm_case
+ *   The crm_case object.
+ */
+function crm_case_save(Model $crm_case) {
+  return $crm_case->save();
+}
+
+
+/**
+ * Saves a crm_case type to the db.
+ */
+function crm_case_type_save(ModelType $type) {
+  $type->save();
+}
+
+
+/**
+ * Deletes a crm_case type from the db.
+ */
+function crm_case_type_delete(ModelType $type) {
+  $type->delete();
+}
+
+
+/**
+ * URI callback for crm_cases
+ */
+function crm_case_uri(Model $crm_case){
+  return array(
+    'path' => 'crm_case/' . $crm_case->crm_case_id,
+  );
+}
+
+
+/**
+ * Menu title callback for showing individual entities
+ */
+function crm_case_page_title(Model $crm_case){
+  return $crm_case->name;
+}
+
+
+/**
+ * Sets up content to show an individual crm_case
+ * @todo - get rid of drupal_set_title();
+ */
+function crm_case_page_view($crm_case, $view_mode = 'full') {    
+  $controller = entity_get_controller('crm_case');  
+  $content = $controller->view(array($crm_case->crm_case_id => $crm_case));
+  drupal_set_title($crm_case->name);
+  return $content;
+}
+
+
+/**
+ * Implements hook_views_api().
+ */
+function crm_case_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'crm_case') . '/views',
+  );
+}
+
+
+/**
+ * Implement hook_theme().
+ */
+function crm_case_theme() {
+  return array(
+    'crm_case_add_list' => array(
+      'variables' => array('content' => array()),
+      'file' => 'crm_case.admin.inc',
+    ),
+    'crm_case' => array(
+      'render element' => 'elements',
+      'template' => 'crm_case',
+    ),
+   'crm_case_sample_data' => array(
+      'variables' => array('crm_case_sample_data', 'crm_case' => NULL),
+      'template' => 'crm_case-sample-data',
+    ),
+
+
+  );
+}  
+
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function crm_case_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link 'admin/structure/crm_cases/add' on 'admin/structure/crm_cases'.
+  if ($root_path == 'admin/content/crm_cases') {
+    $item = menu_get_item('admin/content/crm_cases/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+
+/**
+ * The class used for crm_case entities
+ */
+class Model extends Entity {
+  
+  public function __construct($values = array()) {
+    parent::__construct($values, 'crm_case');
+  }
+
+  protected function defaultLabel() {
+    return $this->name;
+  }
+
+  protected function defaultUri() {
+    return array('path' => 'crm_case/' . $this->crm_case_id);
+  }
+  
+  
+}
+
+
+/**
+ * The class used for crm_case type entities
+ */
+class ModelType extends Entity {
+  
+  public $type;
+  public $label;
+  
+  public function __construct($values = array()) {
+    parent::__construct($values, 'crm_case_type');
+  }
+  
+}
+
+
+/**
+ * The Controller for Model entities
+ */
+class ModelController extends EntityAPIController {
+  public function __construct($entityType) {
+    parent::__construct($entityType);
+  }
+
+
+  /**
+   * Create a crm_case - we first set up the values that are specific
+   * to our crm_case schema but then also go through the EntityAPIController
+   * function.
+   * 
+   * @param $type
+   *   The machine-readable type of the crm_case.
+   *
+   * @return
+   *   A crm_case object with all default fields initialized.
+   */
+  public function create(array $values = array()) {
+    // Add values that are specific to our Model
+    $values += array( 
+      'crm_case_id' => '',
+      'is_new' => TRUE,
+      'title' => '',
+      'created' => '',
+      'changed' => '',
+      'data' => '',
+    );
+    
+    $crm_case = parent::create($values);
+    return $crm_case;
+  }
+  
+  /**
+   * Overriding the buldContent function to add entity specific fields
+   */
+  public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
+    $content = parent::buildContent($entity, $view_mode, $langcode, $content);
+    $content['crm_case_sample_data'] =  array(
+      '#markup' => theme('crm_case_sample_data', array('crm_case_sample_data' => check_plain($entity->data['sample_data']), 'crm_case' => $entity)),
+    );
+
+    return $content;
+  }
+  
+}
+
+
+/**
+ * The Controller for Model entities
+ */
+class ModelTypeController extends EntityAPIControllerExportable {
+  public function __construct($entityType) {
+    parent::__construct($entityType);
+  }
+  
+   /**
+   * Create a crm_case type - we first set up the values that are specific
+   * to our crm_case type schema but then also go through the EntityAPIController
+   * function.
+   * 
+   * @param $type
+   *   The machine-readable type of the crm_case.
+   *
+   * @return
+   *   A crm_case type object with all default fields initialized.
+   */
+  public function create(array $values = array()) {
+    // Add values that are specific to our Model
+    $values += array( 
+      'id' => '',
+      'is_new' => TRUE,
+      'data' => '',
+    );
+    $crm_case_type = parent::create($values);
+    return $crm_case_type;
+  }
+
+}
