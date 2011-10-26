@@ -76,6 +76,9 @@ projects[webform][version] = "3.13"
 projects[rubik][subdir] = "contrib"
 projects[rubik][version] = "4.0-beta6"
 
+projects[tao][subdir] = "contrib"
+projects[tao][version] = "3.0-beta4"
+
 ; Modules in development
 
 ; Trellon CRM
