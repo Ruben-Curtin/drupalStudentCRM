@@ -5,21 +5,20 @@
 */
 class StudentCRMWebTestCase extends DrupalWebTestCase {
   
-  protected $privileged_user;
-	
-	var $profile = 'student_crm';
-	
-	var $roles = array();
-	
-	function setUp($args) {
-		foreach(user_roles() as $rid => $role) {
-			$permissions = db_select('role_permission', 'r')
-						   ->fields('r', array('permission'))
-						   ->condition('r.rid', $rid);
-				
-			$this->roles[$role] = $permissions->execute()->fetchCol();
-		}
-		parent::setUp($args);
-	}
+  var $profile = 'student_crm';
+  
+  var $roles = array();
+  
+  function setUp() {
+    foreach(user_roles() as $rid => $role) {
+      $permissions = db_select('role_permission', 'r')
+          		     ->fields('r', array('permission'))
+          		     ->condition('r.rid', $rid);
+          
+      $this->roles[$role] = $permissions->execute()->fetchCol();
+    }
+    $info = drupal_parse_info_file('profiles/student_crm/student_crm.info');
+    parent::setUp($info['dependencies']);
+  }
 	
 }

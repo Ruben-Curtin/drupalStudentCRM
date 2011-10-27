@@ -4,13 +4,15 @@ module_load_include('test', 'crm_student', 'tests/crm_student_base_test');
 
 class StudentCRMBaseTests extends StudentCRMWebTestCase {
 	
-	var $advisor;
+  var $advisor;
+  
+  var $authenticated;
 	
-	public function setUp() {
-		parent::setUp($this->modules);
-		$this->advisor = $this->drupalCreateUser($this->roles['advisor']);
-		$this->authenticated = $this->drupalCreateUser($this->roles['authenticated']);
-	}
+  public function setUp() {
+      $this->advisor = $this->drupalCreateUser($this->roles['advisor']);
+      $this->authenticated = $this->drupalCreateUser($this->roles['authenticated']);
+      parent::setUp();
+  }
 	
   public static function getInfo() {
     return array(
@@ -21,10 +23,7 @@ class StudentCRMBaseTests extends StudentCRMWebTestCase {
   }
   
   public function testStudentEntityExists() {
-    global $base_dir;
-    $base = url(drupal_get_path('module', 's4_api_rest'), array('absolute' => true));
-  	
-  	$this->drupalLogin($this->advisor);
+    $this->drupalLogin($this->advisor);
   	$this->drupalGet('crm/contact/add');
   	$this->assertText(t('Add Student'));
   }
