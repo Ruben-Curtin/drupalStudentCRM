@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Student CRM Demo feature.
+ */
+
+include_once('student_crm_demo.features.inc');
