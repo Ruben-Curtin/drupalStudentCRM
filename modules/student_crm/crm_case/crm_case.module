@@ -76,6 +76,39 @@ function crm_case_entity_info() {
   return $return;
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function crm_case_block_info() {
+  $blocks['crm_create_case'] = array('info' => 'Create case form');
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function crm_case_block_view($delta) {
+   module_load_include('inc', 'crm_case', 'crm_case.blocks');
+   $function_name = 'crm_case_blocks_'. $delta;
+   if(function_exists($function_name)) {
+   	return $function_name();
+   }
+}
+
+/**
+ * Implements hook_crm_case_delete
+ * Finds any relation entities that reference this case and deletes them
+ */
+function crm_case_crm_case_delete($case) {
+  $relations = db_select('field_data_endpoints', 'e')
+  		       ->fields('e', array('entity_id'))
+  		       ->condition('e.endpoints_entity_id', $case->cid)
+  		       ->condition('e.endpoints_entity_type', 'crm_case')
+  		       ->condition('e.entity_type', 'relation')
+  		       ->execute()
+  		       ->fetchAllKeyed();
+  relation_multiple_delete($relations);
+}
 
 /**
  * Implements hook_entity_info_alter().
@@ -296,7 +329,7 @@ function crm_case_type_delete(CRMCaseType $type) {
  */
 function crm_case_uri(CRMCase $crm_case){
   return array(
-    'path' => 'crm_case/' . $crm_case->cid,
+    'path' => 'crm/case/' . $crm_case->cid,
   );
 }
 
@@ -318,17 +351,6 @@ function crm_case_page_view($crm_case, $view_mode = 'full') {
   $content = $controller->view(array($crm_case->cid => $crm_case));
   drupal_set_title($crm_case->name);
   return $content;
-}
-
-
-/**
- * Implements hook_views_api().
- */
-function crm_case_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'crm_case') . '/views',
-  );
 }
 
 
@@ -576,10 +598,10 @@ class CRMCaseUIController extends EntityDefaultUIController {
     );
     
     // Menu item for viewing crm_cases
-    $items['crm_case/' . $wildcard] = array(
+    $items['crm/case/' . $wildcard] = array(
       //'title' => 'Title',
       'title callback' => 'crm_case_page_title',
-      'title arguments' => array(1),
+      'title arguments' => array(2),
       'page callback' => 'crm_case_page_view',
       'page arguments' => array(1),
       'access callback' => 'crm_case_access',

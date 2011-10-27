@@ -375,6 +375,7 @@ a.add {
   width: 200px;
   margin-left: -10px;
   font-size: 1.5em;
+  margin-right: -7px;
 }
 /** RIGHT SIDEBAR **/
 .sidebar.right h1,
