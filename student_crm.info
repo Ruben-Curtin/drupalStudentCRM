@@ -76,6 +76,5 @@ dependencies[] = crm_case
 
 ; variables
 variables[site_frontpage] = crm
-variables[site_403] = user/login
 variables[site_name] = Student CRM
 variables[admin_theme] = rubik
