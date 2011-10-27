@@ -107,6 +107,12 @@ function crm_student_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'crm_case-crm_create_case' => array(
+          'module' => 'crm_case',
+          'delta' => 'crm_create_case',
+          'region' => 'sidebar_left',
+          'weight' => '3',
+        ),
         'views-crm_contact_fields-block_2' => array(
           'module' => 'views',
           'delta' => 'crm_contact_fields-block_2',
@@ -124,6 +130,12 @@ function crm_student_context_default_contexts() {
           'delta' => 'crm_student_advisors-block',
           'region' => 'sidebar_right',
           'weight' => '-8',
+        ),
+        'views-crm_contact_cases-block' => array(
+          'module' => 'views',
+          'delta' => 'crm_contact_cases-block',
+          'region' => 'sidebar_right',
+          'weight' => '-10',
         ),
         'views-crm_contact_fields-block' => array(
           'module' => 'views',

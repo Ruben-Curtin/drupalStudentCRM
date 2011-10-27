@@ -41,6 +41,6 @@ class crm_case_handler_link_field extends views_handler_field {
     $text = !empty($this->options['text']) ? $this->options['text'] : t('view');
     $cid = $values->{$this->aliases['cid']};
 
-    return l($text, 'crm_case/' . $cid);
+    return l($text, 'crm/case/' . $cid);
   }
 }

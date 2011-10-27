@@ -72,10 +72,9 @@ features[user_permission][] = "show more format tips link"
 features[user_permission][] = "skip comment approval"
 features[user_permission][] = "track user history"
 features[user_permission][] = "view any css_student crm_case"
+features[views_view][] = "crm_contact_fields"
 features[views_view][] = "search_contacts"
-
-files[]=tests/crm_student.test
-
+files[] = "tests/crm_student.test"
 name = "CRM Student"
 package = "Student CRM"
 php = "5.2.4"

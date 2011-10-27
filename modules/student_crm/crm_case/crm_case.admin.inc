@@ -65,7 +65,14 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   // Add the field related form elements.
   $form_state['crm_case'] = $crm_case;
   field_attach_form('crm_case', $crm_case, $form, $form_state);
-
+  
+  if(arg(4) && $contact = crm_contact_load(arg(4))) {
+    $form['crm_contact'] = array(
+      '#type' => 'hidden',
+      '#value' => $contact->contact_id,
+    );
+  }
+  
   $form['actions'] = array(
     '#type' => 'container',
     '#attributes' => array('class' => array('form-actions')),
@@ -132,6 +139,22 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
   $crm_case->changed = time();
   
   $crm_case->save();
+  
+  if($crm_case->crm_contact) {
+    $contact = crm_contact_load($crm_case->crm_contact);
+    $relation = relation_create('crm_contact_case', array(
+                    array('entity_type' => 'crm_case',
+                           'entity_bundle' => $crm_case->type,
+                           'entity_id' => $crm_case->cid,
+                           'r_index' => 0),
+                      array('entity_type' => 'crm_contact',
+                             'entity_bundle' => $contact->type, 
+                             'entity_id' => $contact->contact_id,
+                             'r_index' => 1,)
+                 ));
+    $rid = relation_save($relation);
+  }
+  
   $form_state['redirect'] = 'crm/cases';
 }
 
