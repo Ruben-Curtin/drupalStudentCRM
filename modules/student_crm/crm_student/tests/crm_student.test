@@ -1,0 +1,31 @@
+<?php
+
+module_load_include('test', 'crm_student', 'tests/crm_student_base_test');
+
+class StudentCRMBaseTests extends StudentCRMWebTestCase {
+	
+	var $advisor;
+	
+	public function setUp() {
+		parent::setUp($this->modules);
+		$this->advisor = $this->drupalCreateUser($this->roles['advisor']);
+		$this->authenticated = $this->drupalCreateUser($this->roles['authenticated']);
+	}
+	
+  public static function getInfo() {
+    return array(
+      'name' => 'Student CRM Student Entity',
+      'description' => 'Test the basics of the student contact type.',
+      'group' => 'Student CRM',
+    );
+  }
+  
+  public function testStudentEntityExists() {
+    global $base_dir;
+    $base = url(drupal_get_path('module', 's4_api_rest'), array('absolute' => true));
+  	
+  	$this->drupalLogin($this->advisor);
+  	$this->drupalGet('crm/contact/add');
+  	$this->assertText(t('Add Student'));
+  }
+}
